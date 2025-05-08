@@ -1,0 +1,110 @@
+.map-container {
+    margin-top: 5px;
+    /*height: 300px;*/
+    height: 100vh;
+  }
+
+  .map-frame {
+    border: 1px solid #1cd1e1;
+    height: 100%;
+    border-radius: 5px;
+  }
+  
+  #map {
+    height: 100%;
+  }
+  
+/*Para realizar los cambios enntre opciones*/
+  .ps-tab {
+    display: none;
+  }
+
+  .ps-tab.active {
+    display: block;
+  }
+
+  .avatar-number {
+    /* Estilos para el número */
+    background: linear-gradient(to bottom, #8ff7e0, #27bba2); /* Fondo degradado */
+    color: white; /* Color del texto */
+    border-radius: 20%; /* Redondea las esquinas */
+  
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    width: 100%; /* Ajusta el ancho al contenedor */
+    height: 100%; /* Ajusta la altura al contenedor */
+    font-size: 40px; /* Tamaño del número */
+  }
+  
+  .avatar.active {
+    /* Estilos para el contenedor activo del avatar */
+    background: linear-gradient(to bottom, #007bff, #b3d2f3); /* Fondo degradado */
+    color: white; /* Color del texto */
+    transform: scale(1.2); /* Aumenta el tamaño */
+    border-radius: 25%; /* Redondea las esquinas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra para resaltar */
+  }
+
+  /**Segundo Menu*/
+
+  .step-menu {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.step-item {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.step-item a {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-item i {
+  font-size: 24px;
+  margin-bottom: 5px;
+  color: #6c757d;
+}
+
+.step-item span {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.step-item:hover {
+  transform: scale(1.1);
+}
+
+.active-step i {
+  color: #007bff; /* Color para el icono activo */
+}
+
+.active-step span {
+  color: #007bff; /* Color para el texto activo */
+}
+
+.card-header{
+  padding: auto;
+}
+
+
+/*textos que cambian de color en la calculadora*/
+
+.text-danger {
+  color: red;
+  font-weight: bold;
+}
+
+.text-default {
+  color: black; /* O cualquier otro color */
+}

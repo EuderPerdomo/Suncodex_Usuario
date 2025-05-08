@@ -1,0 +1,331 @@
+<app-nav></app-nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- Panel Izquierdo: Selector con Vista Previa -->
+    <div class="col-md-4 col-lg-3">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h5>Selecciona una Lámpara</h5>
+        </div>
+
+        <div>
+          <select [(ngModel)]="lamparaSeleccionada" (change)="cargarLampara()">
+            <option value="{{i}}" *ngFor="let item of lamparas,index as i"> {{item.nombre}}</option>
+          </select>
+          <button (click)="removeModel()">
+            <i class="fa-solid fa-info-circle"></i>
+            Remover Modelo
+          </button>
+
+        </div>
+
+        <div class="card-body">
+          <cdk-accordion class="example-accordion">
+            <div *ngFor="let item of data,index as indiceColeccion">
+              <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item">
+                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                  {{ item.nombre }}
+                  <span>{{ accordionItem.expanded ? 'X' : 'Abrir' }}</span>
+                </div>
+
+
+                <div class="example-accordion-item-body" [style.display]="accordionItem.expanded ? '' : 'none'">
+                  <div class="lampara-list">
+                    <div class="lampara-item" *ngFor="let sub of item.lamparas,index as indiceLampara">
+                      <div class="d-flex align-items-center mb-3">
+                        <!-- Imagen de Vista Previa -->
+                        <img [src]="item.imagen" alt="{{sub.nombre}}" class="img-thumbnail me-2"
+                          style="width: 60px; height: 60px; object-fit: cover;">
+                        <!-- Nombre e Interacción -->
+                        <div class="flex-grow-1">
+                          <p class="mb-1 fw-bold">{{sub.nombre}}</p>
+                          <button class="btn btn-sm btn-primary m-2"
+                            (click)="cargarLampara2(indiceColeccion,indiceLampara)">Seleccionar</button>
+
+                          <a href="{{sub.enlaceAR}}" type="button" class="btn btn-sm btn-primary" target="_blank">AR</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+              </cdk-accordion-item>
+            </div>
+          </cdk-accordion>
+          <!-- <div class="lampara-list">
+            <div class="lampara-item" *ngFor="let item of lamparas; index as i">
+              <div class="d-flex align-items-center mb-3">
+            
+                <img [src]="item.imagen" alt="{{item.nombre}}" class="img-thumbnail me-2"
+                  style="width: 60px; height: 60px; object-fit: cover;">
+              
+                <div class="flex-grow-1">
+                  <p class="mb-1 fw-bold">{{item.nombre}}</p>
+                  <button class="btn btn-sm btn-primary" (click)="cargarLampara()">Seleccionar</button>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      <button class="btn btn-danger w-100 mt-3" (click)="removeModel()">
+        <i class="fa-solid fa-trash"></i> Remover Modelo
+      </button>
+    </div>
+
+    <!-- Panel Derecho: Canvas -->
+    <div class="col-md-8 col-lg-9">
+      <div class="canvas-container">
+        <div class="model-name">{{NombrelamparaActual}}</div>
+        <canvas id="componente"></canvas>
+        <div class="menu">
+          <div class="menu-item" (click)="moverCamara('plasticoLed')" title="placaLed">
+            <i class="fa-solid fa-lightbulb"></i>
+          </div>
+          <div class="menu-item" (click)="moverCamara('Bateria')" title="Batería">
+            <i class="fa-solid fa-battery-three-quarters"></i>
+          </div>
+          <div class="menu-item" (click)="moverCamara('panel')" title="Panel Solar">
+            <i class="fa-solid fa-solar-panel"></i>
+          </div>
+          <div class="menu-item" (click)="moverCamara('panel')" title="Especificaciones técnicas">
+            <i class="fa-solid fa-info-circle"></i>
+          </div>
+          <div class="menu-item" (click)="moverCamara('panel')" title="General">
+            <i class="fa-solid fa-cog"></i>
+          </div>
+          <!-- <div class="menu-item" (click)="onOff()" title="OnOff">
+                  <i class="fa-solid fa-power-off"></i>
+                </div> -->
+          <div class="menu-item" (click)="onOff()" title="Dia/Noche">
+            <i [class]="lightState ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+          </div>
+
+        </div>
+        <div id="info-box" class="info-box"></div>
+      </div>
+
+      <!-- Inicia botones de mas informacion -->
+      <div class="row">
+        <a href="https://3dwarehouse.sketchup.com/ar-view/bfb074cc-e559-429b-8c90-2e168c4fa53c">Ver en AR</a>
+        <p>
+          <a class="btn btn-primary m-1" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+            aria-expanded="false"
+            aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">Ficha Tecnica</a>
+
+          <button class="btn btn-primary m-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#multiCollapseExample2" aria-expanded="false"
+            aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">Fotometria</button>
+
+          <button class="btn btn-primary m-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#multiCollapseExample3" aria-expanded="false"
+            aria-controls="multiCollapseExample1 multiCollapseExample2 multiCollapseExample3">Medidas</button>
+
+        </p>
+        <div class="row">
+          <div class="col-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body">
+                <h4 class="text-center mb-4">Ficha Técnica - Lámpara Solar para Jardín</h4>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                    <tbody>
+                      <tr>
+                        <th scope="row" class="bg-light">Familia</th>
+                        <td>Lámparas para jardines</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Tipo de Fuente</th>
+                        <td>Solar</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Hermeticidad Luminaria</th>
+                        <td>IP65</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Potencia Nominal</th>
+                        <td>5W</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Flujo Luminoso (Lm)</th>
+                        <td>1000Lm</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Reproducción de Color (IRC)</th>
+                        <td>≥80</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Temperatura del Color</th>
+                        <td>4000K</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Sistema de Fijación</th>
+                        <td>Poste Recto y Curvo</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Eficacia Lumínica</th>
+                        <td>185Lm/W</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Ángulo de Apertura</th>
+                        <td>H:141° - V:97°</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Temperatura de Operación</th>
+                        <td>-25°C hasta 40°C</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Accesorios</th>
+                        <td>N/A</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Batería</th>
+                        <td>FeLiPO4 15Ah-12.8V</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Tiempo de Carga</th>
+                        <td>8 Horas</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Tiempo de Descarga</th>
+                        <td>12 Horas</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Panel Solar</th>
+                        <td>Monocristalino 20W</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Uso de la Luminaria</th>
+                        <td>Exterior</td>
+                      </tr>
+                      <tr>
+                        <th scope="row" class="bg-light">Garantía</th>
+                        <td>1 año</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+              <div class="card card-body">
+
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample2">
+              <div class="card card-body">
+                Fotometrias
+                Some placeholder content for the second collapse component of this multi-collapse example. This panel is
+                hidden by default but revealed when the user activates the relevant trigger.
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="collapse multi-collapse" id="multiCollapseExample3">
+              <div class="card card-body">
+                Imagen de medidas lampara
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Finalizan botones de mas informacion -->
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+  <!-- <div class="canvas-container">
+    <div class="model-name">{{NombrelamparaActual}}</div>
+    <canvas id="componente"></canvas>
+    <div class="menu">
+      <div class="menu-item" (click)="moverCamara('plasticoLed')" title="placaLed">
+        <i class="fa-solid fa-lightbulb"></i>
+      </div>
+      <div class="menu-item" (click)="moverCamara('Bateria')" title="Batería">
+        <i class="fa-solid fa-battery-three-quarters"></i>
+      </div>
+      <div class="menu-item" (click)="moverCamara('panel')" title="Panel Solar">
+        <i class="fa-solid fa-solar-panel"></i>
+      </div>
+      <div class="menu-item" (click)="moverCamara('panel')" title="Especificaciones técnicas">
+        <i class="fa-solid fa-info-circle"></i>
+      </div>
+      <div class="menu-item" (click)="moverCamara('panel')" title="General">
+        <i class="fa-solid fa-cog"></i>
+      </div>
+      <div class="menu-item" (click)="onOff()" title="Dia/Noche">
+        <i [class]="lightState ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+      </div>
+
+    </div>
+    <div id="info-box" class="info-box"></div>
+  </div>
+</div>
+-->
+
+
+
+  <!-- <div class="sketchfab-embed-wrapper">
+    <iframe title="Cuadra" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"
+      allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport
+      execution-while-not-rendered web-share src="https://sketchfab.com/models/abe9194865b246f0a91143a75f3d1e86/embed">
+    </iframe>
+    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a
+        href="https://sketchfab.com/3d-models/cuadra-abe9194865b246f0a91143a75f3d1e86?utm_medium=embed&utm_campaign=share-popup&utm_content=abe9194865b246f0a91143a75f3d1e86"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Cuadra </a> by <a
+        href="https://sketchfab.com/euderfabian1996?utm_medium=embed&utm_campaign=share-popup&utm_content=abe9194865b246f0a91143a75f3d1e86"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> euderfabian1996 </a> on <a
+        href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=abe9194865b246f0a91143a75f3d1e86"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p>
+  </div>
+
+  <div class="sketchfab-embed-wrapper"> <iframe title="NSLV_60W" frameborder="0" allowfullscreen
+      mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking"
+      xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="640"
+      height="480" src="https://sketchfab.com/models/fbc036b2c7ec44b99fb59aba05e55fb3/embed"> </iframe>
+    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a
+        href="https://sketchfab.com/3d-models/nslv-60w-fbc036b2c7ec44b99fb59aba05e55fb3?utm_medium=embed&utm_campaign=share-popup&utm_content=fbc036b2c7ec44b99fb59aba05e55fb3"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> NSLV_60W </a> by <a
+        href="https://sketchfab.com/euderfabian1996?utm_medium=embed&utm_campaign=share-popup&utm_content=fbc036b2c7ec44b99fb59aba05e55fb3"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> euderfabian1996 </a> on <a
+        href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=fbc036b2c7ec44b99fb59aba05e55fb3"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p>
+  </div>
+
+  <div class="sketchfab-embed-wrapper"> <iframe title="NSLZ-60W" frameborder="0" allowfullscreen
+      mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking"
+      xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width="640"
+      height="480" src="https://sketchfab.com/models/33205d14311d4bdbb5ca7062708ef86b/embed?ui_theme=dark"> </iframe>
+    <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a
+        href="https://sketchfab.com/3d-models/nuevos-led-z60-33205d14311d4bdbb5ca7062708ef86b?utm_medium=embed&utm_campaign=share-popup&utm_content=33205d14311d4bdbb5ca7062708ef86b"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> NSLZ-60W </a> by <a
+        href="https://sketchfab.com/euderfabian1996?utm_medium=embed&utm_campaign=share-popup&utm_content=33205d14311d4bdbb5ca7062708ef86b"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> euderfabian1996 </a> on <a
+        href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=33205d14311d4bdbb5ca7062708ef86b"
+        target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p>
+  </div> -->
+
+
+
+
+
+  <app-footer></app-footer>

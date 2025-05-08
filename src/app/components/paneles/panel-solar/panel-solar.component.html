@@ -1,0 +1,62 @@
+<app-nav></app-nav>
+
+<div class="spline-container" >
+
+  <div class="overlay-content">
+    <h2>Paneles Solares</h2>
+  </div>
+
+  <spline-viewer url="https://prod.spline.design/kCt27foGTAAkUuUL/scene.splinecode" loading-anim-type="spinner-small"
+    events-target="global">
+  </spline-viewer>
+</div>
+
+<div class="container-fluid cards-section">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <!-- <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/avanzada.jpg" class="card-img-top" alt="Calculadora Avanzada">
+        <div class="card-body">
+          <h3 class="card-title">Arreglos Fotovoltaicos</h3>
+          <p class="card-text">
+            Calcula las salidas de diferentes arreglos fotovoltaicos
+          </p>
+          <a [routerLink]="['/controladorFuncionalidades/pwmVSmppt']" class="btn btn-outline-primary">Arreglos
+            Fotovoltaicos</a>
+        </div>
+      </div>
+    </div> -->
+
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/tax.jpg" class="card-img-top" alt="Facturas">
+        <div class="card-body">
+          <h3 class="card-title">Inclinación/Azimuth</h3>
+          <p class="card-text">
+            Observa como afecta la inclinación y orientación (Azimut) la producción de los paneles Solares
+          </p>
+          <a [routerLink]="['/panelSolar/simularPanelSolar']" class="btn btn-outline-primary">Inclinación / Azimut</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/estandar.jpg" class="card-img-top" alt="Estandar">
+        <div class="card-body">
+          <h3 class="card-title">Arreglos Fotovoltaicos</h3>
+          <p class="card-text">
+        Realiza la configuracion de Diferentes arreglos fotovoltaicos (conexion Serie paralelo)  y observa su comportamiento de salida
+          </p>
+          <a [routerLink]="['/panelSolar/arreglos']" class="btn btn-outline-primary">Arreglos</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<app-footer></app-footer>

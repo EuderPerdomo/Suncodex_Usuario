@@ -1,0 +1,83 @@
+
+<div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+  <h1 class="h2 mb-0">Mi Perfil</h1>
+  <a href="#" class="btn text-danger btn-link fs-base text-decoration-none pe-0">
+    <i class="ci-delete fs-lg mt-n1 me-2"></i>
+   Eliminar Cuenta
+  </a>
+</div>
+<form>
+  <div class="row pb-3">
+    <div class="col-sm-6 mb-4">
+      <label for="ac-fn" class="form-label-lg">Nombres</label>
+      <input type="text" id="ac-fn" class="form-control form-control-lg" value="{{cliente.apellidos}}">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-ln" class="form-label-lg">Apellidos</label>
+      <input type="text" id="ac-ln" class="form-control form-control-lg" value="{{cliente.nombres}}">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-email" class="form-label-lg">Email</label>
+      <input type="email" id="ac-email" class="form-control form-control-lg" value="{{cliente.email}}">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-phone" class="form-label-lg">Telefono</label>
+      <input type="text" id="ac-phone" class="form-control form-control-lg" value="{{cliente.telefono}}">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-password" class="form-label-lg">New Password</label>
+      <div class="password-toggle">
+        <input class="form-control form-control-lg" type="password" id="ac-password">
+        <label class="password-toggle-btn" aria-label="Show/hide password">
+          <input class="password-toggle-check" type="checkbox">
+          <span class="password-toggle-indicator"></span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-password-confirm" class="form-label-lg">New Password</label>
+      <div class="password-toggle">
+        <input class="form-control form-control-lg" type="password" id="ac-password-confirm">
+        <label class="password-toggle-btn" aria-label="Show/hide password">
+          <input class="password-toggle-check" type="checkbox">
+          <span class="password-toggle-indicator"></span>
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-country" class="form-label-lg">Country</label>
+      <select id="ac-country" class="form-select form-select-lg">
+        <option value="" disabled>Choose country</option>
+        <option value="argentina">Australia</option>
+        <option value="brazil">Brazil</option>
+        <option value="belgium">Belgium</option>
+        <option value="france">France</option>
+        <option value="germany">Germany</option>
+        <option value="uk">United Kingdom</option>
+        <option value="usa" selected>USA</option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-city" class="form-label-lg">City</label>
+      <select id="ac-city" class="form-select form-select-lg">
+        <option value="" disabled>Choose city</option>
+        <option value="belgium">Brussels</option>
+        <option value="germany">Berlin</option>
+        <option value="uk">London</option>
+        <option value="argentina">Melbourne</option>
+        <option value="usa" selected>New Jersey</option>
+        <option value="france">Paris</option>
+        <option value="brazil">Rio de Janeiro</option>
+      </select>
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-address" class="form-label-lg">Dirección</label>
+      <input type="text" id="ac-address" class="form-control form-control-lg" value="{{cliente.direccion}}">
+    </div>
+    <div class="col-sm-6 mb-4">
+      <label for="ac-zip" class="form-label-lg">ZIP Code</label>
+      <input type="text" id="ac-zip" class="form-control form-control-lg" value="45463">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary btn-lg">&nbsp;Save changes&nbsp;</button>
+</form>

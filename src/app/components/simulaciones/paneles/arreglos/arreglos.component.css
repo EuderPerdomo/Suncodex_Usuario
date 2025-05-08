@@ -1,0 +1,134 @@
+
+/*Inician simular arreglos paneles*/
+.container {
+  padding: 20px;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 30px;
+}
+
+.group {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #eef5fb;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
+  margin: 5px;
+  width: 80px;
+  height: 120px;
+  font-size: 14px;
+  font-weight: bold;
+  position: relative;
+}
+
+
+.panel img {
+  width: 50px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.fa-pencil {
+  margin-right: 5px;
+}
+
+/* Finaliza simular arreglos paneles*/
+
+
+
+/*Inicia Configuracion de arreglos ************************************************************************/
+
+/* Línea horizontal (Conexión en serie) mitad de los paneles */
+.panel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 20px;
+  height: 2px;
+  background: black;
+}
+
+/* Línea horizontal lado Izquierdo del primer panel */
+.row .panel:first-child::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: 20px;
+  height: 2px;
+  background: black;
+}
+
+
+/* Línea vertical en paralelo */
+.parallel-line {
+  width: 2px;
+  height: calc(100% - 45px);
+  background: black;
+  position: absolute;
+  left: -30px;
+  top: 65px;
+}
+
+.general {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  gap: 30px;
+
+}
+
+
+/* Botón eliminar fila oculto por defecto */
+.remove-row-btn {
+  position: absolute;
+  right: -120px; /* Lo coloca a la derecha de la fila */
+  top: 50%;
+  transform: translateY(-50%); /* Centra el botón verticalmente */
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  opacity: 0; /* Oculta el botón */
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+ /* Muestra el botón cuando se pasa el mouse sobre la fila */
+ .row:hover .remove-row-btn {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*Finaliza configuración de arreglos ************************************************************************/

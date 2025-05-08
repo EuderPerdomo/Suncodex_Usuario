@@ -1,0 +1,182 @@
+<app-nav></app-nav>
+<!-- Breadcrumb -->
+<nav class="bg-secondary mb-3" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb breadcrumb-alt mb-0">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/']"><i class="ci-home"></i></a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/productos/categoria',producto.categoria.titulo]">{{producto.categoria.titulo}}
+          Categoria</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{producto.nombre}} Producto</li>
+    </ol>
+  </div>
+</nav>
+
+  <!-- Page title -->
+<section *ngIf="producto._id" class="container d-md-flex align-items-center justify-content-between py-3 py-md-4 mb-3">
+  <h1 class="mb-2 mb-md-0">{{producto.nombre}}</h1>
+  <span class="text-muted"><strong>Art. No.</strong> {{producto._id.toUpperCase()}}</span>
+</section>
+
+
+<!-- Single product -->
+<section class="container mb-lg-3">
+
+  <!-- Nav tabs -->
+  <div data-simplebar data-simplebar-auto-hide="false">
+    <ul class="nav nav-tabs flex-nowrap text-nowrap" role="tablist">
+      <li class="nav-item">
+        <a href="#info" class="nav-link active" data-bs-toggle="tab" role="tab">Información General</a>
+      </li>
+      <li class="nav-item">
+        <a href="#details" class="nav-link" data-bs-toggle="tab" role="tab">Dimensiones</a>
+      </li>
+      <li class="nav-item">
+        <a href="#reviews" class="nav-link" data-bs-toggle="tab" role="tab">
+          Fotometrias
+          <sup class="ms-1">12</sup>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="tab-content border-top pt-4">
+
+<!-- Inicia prueba -->
+
+<!-- Fin Prueba -->
+
+
+
+    <!-- General info -->
+    <div class="tab-pane fade show active pt-3" id="info" role="tabpanel">
+      <div class="row">
+        <div class="col-md-12 mb-md-0 mb-4">
+          <div [innerHTML]="getSafeHtml(producto.sketchFab)"></div>
+          <!--Finaliza Imagen  -->
+          <!--Inicia Swiper  -->
+          <div class="mx-auto" style="max-width: 570px;">
+            <swiper-container style="--swiper-navigation-color: #1650f1; --swiper-pagination-color: #fff"
+              class="mySwiper" thumbs-swiper=".mySwiper2" space-between="10" navigation="true">
+              <swiper-slide *ngFor="let item of carrusel2">
+                <div class="ratio ratio-4x3" role="button"
+                  [ngStyle]="{background: 'url(' + item.imagen +') center / cover'}"></div>
+              </swiper-slide>
+            </swiper-container>
+
+            <swiper-container class="mySwiper2" space-between="10" slides-per-view="4" free-mode="true"
+              watch-slides-progress="true">
+              <swiper-slide *ngFor="let item of carrusel2">
+                <div class="ratio ratio-4x3" role="button"
+                  [ngStyle]="{background: 'url(' + item.imagen +') center / cover'}"></div>
+              </swiper-slide>
+            </swiper-container>
+          </div>
+
+          <!-- Fin swiper -->
+        </div>
+        <div class="col-md-6 ps-xl-5">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+            <!-- Price -->
+            <div class="d-flex align-items-center mb-sm-0 mb-4">
+              <span class="h3 d-inline-block mb-0 text-dark">{{producto.precio |currency:'COP':'$':'3.0'}}</span>
+              <!-- <del class="d-inline-block ms-2 ps-1 fs-lg text-muted">$31.00</del>
+              <span class="ms-4 p-2 badge bg-danger fs-base fw-bold">- 50%</span> -->
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Product details -->
+    <div class="tab-pane fade pt-3" id="details" role="tabpanel">
+      <div class="row">
+        <!-- Columna derecha: Visor 3D + Info superpuesta -->
+        <div class="col-md-6">
+    
+          <div class="ratio ratio-16x9"> <!-- Misma relación que la primera -->
+            <img class="img-contain" 
+                 [src]="getCloudinaryImageUrl(producto.imagenMedidas, 570, 640, 'auto')"
+                 alt="Imagen Simulación">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Reviews -->
+    <div class="tab-pane fade pt-3" id="reviews" role="tabpanel">
+      <div class="row align-items-center g-3"> <!-- align-items-center y espacio (gap) -->
+        
+        <!-- Primera imagen -->
+        <div class="col-md-6">
+          <div class="ratio ratio-16x9"> <!-- Relación de aspecto (ajústala) -->
+            <img class="img-contain" 
+                 [src]="getCloudinaryImageUrl(producto.imagenIes, 570, 640, 'auto')"
+                 alt="Imagen IES">
+          </div>
+        </div>
+        
+        <!-- Segunda imagen -->
+        <div class="col-md-6">
+          <div class="ratio ratio-16x9"> <!-- Misma relación que la primera -->
+            <img class="img-contain" 
+                 [src]="getCloudinaryImageUrl(producto.imagenSimulacion, 570, 640, 'fill')"
+                 alt="Imagen Simulación">
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Related products (carousel) -->
+<section class="py-5" style="background-color: #e5e8ed;">
+  <div class="container my-lg-2 py-2 py-md-4">
+    <div class="d-flex align-items-center justify-content-between pb-sm-1 mb-5">
+      <h2 class="h1 pe-3 mb-0">Casos de Aplicación</h2>
+      <div class="tns-custom-controls tns-controls-inverse" id="custom-controls-related" tabindex="0">
+        <button type="button" data-controls="prev" tabindex="-1">
+          <i class="ci-arrow-left"></i>
+        </button>
+        <button type="button" data-controls="next" tabindex="-1">
+          <i class="ci-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+
+    <div class="mx-auto">
+
+      <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+        slides-per-view="3" navigation="true">
+        <swiper-slide *ngFor="let item of casosAplicacion">
+         
+          <div class="card">
+            <img [src]="getCloudinaryImageUrl(item.imagen, 450, 450, 'fill')" alt="Product image">
+            <div class="card-body">
+              <h5 class="card-title">{{item.titulo}}</h5>
+              <p class="card-text">{{item.descripcion}}</p>
+            </div>
+          </div>
+
+        </swiper-slide>
+
+      </swiper-container>
+    </div>
+
+
+  </div>
+</section>
+
+<app-footer></app-footer>

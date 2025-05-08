@@ -1,0 +1,89 @@
+<app-nav></app-nav>
+
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-3" id="columna3D">
+            <select [(ngModel)]="selectedModel" (change)="onModelChange()">
+                <option value="panelSolar">Panel Solar</option>
+                <option value="ciudad">Ciudad</option>
+                <option value="ciudad">SolarTracket</option>
+              </select>
+        </div>
+        <div class="col-9">
+            <canvas id="myCanvas" class="panel3D"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-3">
+            <h4>Carcateristicas Panel</h4>
+            <ul>
+                <li>Modelo: {{panelSolar.modelo}}</li>
+                <li>Voltaje En cicuito Abierto (VOC): {{panelSolar.voc}} V</li>
+                <li>Intensidad en corto circuito (ISC): {{panelSolar.isc}} I</li>
+                <li>Intensidad en maxima potencia (IMPP): {{panelSolar.impp}} I</li>
+                <li>Voltaje en maxima potencia (VMPP): {{panelSolar.vmpp}} V</li>
+                <li>Eficiencia (%): {{panelSolar.eficiencia}} %</li>
+                <li>Potencia (W): {{panelSolar.potencia}} W</li>
+                <li>Coeficiente de Potencia-Temperatura: {{panelSolar.coef_pmax_temp}}</li>
+                <li>Coeficiente de Voltage-Temperatura: {{panelSolar.coef_voc_temp}}</li>
+                <li>Coeficiente de Corriente-Temperatura: {{panelSolar.coef_isc_temp}}</li>
+                <li>Temperatura de Operacion Nominal de la Celula (NOCT): {{panelSolar.noct}}</li>
+                <li>Tension: {{panelSolar.tension}} V</li>
+                <li>Fabricante: {{panelSolar.fabricante}}</li>
+                <li>Tecnologia: {{panelSolar.tecnologia}}</li>
+        
+            </ul>
+        
+            <h4>
+                Orientación del panel
+            </h4>
+        
+            <ul>
+                <li>Angulo: {{orientacionPanel.angulo}} Grados</li>
+                <li>Azimuth: {{orientacionPanel.azimuth}} Grados</li>
+            </ul>
+        
+            <h4> Ubicación del Panel</h4>
+            <ul>
+                <li>Latitud: {{ubicacionPanel.latitud}}</li>
+                <li>Longitud: {{ubicacionPanel.longitud}}</li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <!-- <div ><canvas id="c" class="panel3D"></canvas></div> -->
+        </div>
+        <div class="col-2">
+            <div>
+            <label for="azimuthSlider">Azimuth:</label>
+            <input type="range" id="azimuthSlider" min="-180" max="180" value="0" step="1" [(ngModel)]="azimuth">
+            <span id="azimuthValue">{{azimuth}}</span>°
+          </div>
+          
+          <div>
+            <label for="inclinacionSlider">Inclinación:</label>
+            <input type="range" id="inclinacionSlider" min="0" max="90" value="0" step="1" [(ngModel)]="inclinacion">
+            <span id="inclinacionValue">{{inclinacion}}</span>°
+          </div>  
+        </div>
+        <div class="col-4">
+            <canvas id="ChartProducionVariable"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+    
+<div class="row">
+    <div class="col-lg-6"><canvas id="EcuacionTiempo"></canvas></div>
+    <div class="col-lg-6"><canvas id="Declinacion"></canvas></div>
+    <div class="col-lg-6"><canvas id="ChartMensual"></canvas></div>
+    <div class="col-lg-6"><canvas id="ChartMensualHorizontal"></canvas></div>  
+</div>
+</div>
+
+<app-footer></app-footer>

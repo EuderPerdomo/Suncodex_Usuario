@@ -1,0 +1,362 @@
+<app-nav></app-nav>
+<!-- Breadcrumb -->
+<nav class="bg-secondary mb-3" aria-label="breadcrumb" style="margin-top: 160px;">
+  <div class="container">
+    <ol class="breadcrumb breadcrumb-alt mb-0">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/blog/post_list']"><i class="ci-home"></i></a>
+      </li>
+      <li class="breadcrumb-item">
+        <!-- <a href="blog.html">Blog</a> -->
+        <a   [routerLink]="['/blog/categoria/',post.categoria.titulo]">{{post.categoria.titulo}}</a>
+       
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{post.titulo}}</li>
+    </ol>
+  </div>
+</nav>
+
+
+<!-- Post header -->
+<section class="border-bottom py-3 pt-md-4 mb-4">
+  <div class="container">
+    <div class="row justify-content-center pb-2 pb-md-3">
+      <div class="col-lg-8 col-md-10">
+        <h1 class="mb-4 pb-1">{{post.titulo}}</h1>
+        <div class="d-md-flex align-items-center">
+          <ul class="nav nav-muted mb-4 mb-md-0">
+            <li class="nav-item me-2">
+              <a   [routerLink]="['/blog/categoria/',post.categoria.titulo]">{{post.categoria.titulo}}</a>
+              <span class="text-border px-1">|</span>
+            </li>
+            <li class="nav-item me-2">
+              <a href="#" class="nav-link d-inline-block me-2 p-0 fw-normal">
+                {{post.createdAt | date:'longDate' }}
+              </a>
+              <span class="text-border px-1">|</span>
+            </li>
+            <li class="nav-item me-2">
+              <a class="nav-link d-inline-block me-2 p-0 fw-normal" (click)="scrollToSection('comments')">
+                <i class="ci-chat mt-n1 me-1 fs-lg align-middle"></i>
+                {{post.comentarios.length}} Comentarios
+              </a>
+            </li> 
+          </ul>
+          <!-- <div class="ms-md-auto">
+              <a href="#" class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with Facebook">
+                <i class="ci-facebook"></i>
+              </a>
+              <a href="#" class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with Instagram">
+                <i class="ci-instagram"></i>
+              </a>
+              <a href="#" class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with Twitter">
+                <i class="ci-twitter"></i>
+              </a>
+              <a href="#" class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with LinkedIn">
+                <i class="ci-linkedin"></i>
+              </a>
+            </div> -->
+
+
+
+          <!-- <div class="ms-md-auto">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://tu-sitio.com"
+              class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with Facebook"
+              target="_blank">
+              <i class="ci-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/tu-cuenta/" class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2"
+              data-bs-toggle="tooltip" title="Follow us on Instagram" target="_blank">
+              <i class="ci-instagram"></i>
+            </a>
+            <a href="https://twitter.com/intent/tweet?text=Check%20this%20out!&url=https://tu-sitio.com"
+              class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with Twitter"
+              target="_blank">
+              <i class="ci-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://tu-sitio.com&title=Great%20Content"
+              class="btn-social bs-solid me-2 me-md-0 ms-md-2 mb-2" data-bs-toggle="tooltip" title="Share with LinkedIn"
+              target="_blank">
+              <i class="ci-linkedin"></i>
+            </a>
+          </div> -->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Post content -->
+<section class="border-bottom">
+  <div class="container py-2 pt-md-3">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-md-10">
+        <div class="mb-4 pb-2">
+           <img [src]="post.portada" class="rounded" alt="Image">
+          
+          <!-- <img [src]="getCloudinaryImageUrl(post.portada, 400, 150, 'fill')" alt="Product image"> -->
+        </div>
+
+        <!-- <div class="col-lg-12 col-md-12 mb-md-0 mb-4" [innerHTML]="post.contenido">
+        </div> -->
+
+        <div class="col-lg-12 col-md-12 mb-md-0 mb-4" [innerHTML]="sanitizarContenido(post.contenido)" ></div>
+
+        <!-- Tags + Sharing -->
+        <div class="d-md-flex align-items-center justify-content-between py-3 py-md-4">
+          <div class="d-flex align-items-center py-2">
+            <span class="text-dark fw-bold pe-1 me-2 mb-2">Tags:</span>
+            <div>
+              <a *ngFor="let item of tags" class="btn-tag me-2 mb-2">#{{item.etiqueta.slug}}</a>
+            </div>
+          </div>
+          <!-- <div class="d-flex align-items-center py-2">
+            <span class="text-dark fw-bold me-2 mb-2">Compartir:</span>
+            <a href="#" class="btn-social bs-solid ms-2 mb-2" data-bs-toggle="tooltip" title="Facebook">
+              <i class="ci-facebook"></i>
+            </a>
+            <a href="#" class="btn-social bs-solid ms-2 mb-2" data-bs-toggle="tooltip" title="Instagram">
+              <i class="ci-instagram"></i>
+            </a>
+            <a href="#" class="btn-social bs-solid ms-2 mb-2" data-bs-toggle="tooltip" title="Twitter">
+              <i class="ci-twitter"></i>
+            </a>
+            <a href="#" class="btn-social bs-solid ms-2 mb-2" data-bs-toggle="tooltip" title="LinkedIn">
+              <i class="ci-linkedin"></i>
+            </a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Post navigation  Anterior y siguiente-->
+<section class="container pt-5 pb-6">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <nav class="d-flex justify-content-between" aria-label="Post navigation">
+        <!-- Prev -->
+        <a *ngIf="prevPost" [routerLink]="['/blog', prevPost.slug]" class="entry-nav image-scale me-3">
+          <h3 class="h5 entry-nav-heading pb-sm-2">
+            <i class="ci-arrow-left me-2"></i>
+            Prev post
+          </h3>
+          <div class="d-flex align-items-start">
+            <div class="entry-nav-thumb image-inner rounded d-none d-sm-block">
+              <img [src]="getCloudinaryImageUrl(prevPost.portada, 50, 50, 'fill')" class="ms-1" width="100" alt="Image">
+            </div>
+            <div class="ps-sm-3">
+              <span class="fs-sm text-muted">
+                <i class="ci-clock me-2"></i>
+                {{prevPost.createdAt | date:'longDate' }}
+              </span>
+              <h6 class="nav-heading fs-md fw-medium mb-0 mt-1 text-capitalize">
+                {{prevPost.titulo}}
+              </h6>
+            </div>
+          </div>
+        </a>
+        <!-- Next -->
+        <a *ngIf="nextPost" [routerLink]="['/blog', nextPost.slug]" class="entry-nav image-scale ms-3">
+          <h3 class="h5 entry-nav-heading pb-sm-2 text-end">
+            Next post
+            <i class="ci-arrow-right ms-2"></i>
+          </h3>
+          <div class="d-flex align-items-start justify-content-end">
+            <div class="text-end pe-sm-3">
+              <span class="fs-sm text-muted">
+                <i class="ci-clock me-2"></i>
+                {{nextPost.createdAt | date:'longDate' }}
+              </span>
+              <h6 class="nav-heading fs-md fw-medium mb-0 mt-1 text-capitalize">
+                {{nextPost.titulo}}
+              </h6>
+            </div>
+            <div class="entry-nav-thumb image-inner rounded d-none d-sm-block">
+              <img [src]="getCloudinaryImageUrl(nextPost.portada, 50, 50, 'fill')" class="ms-1" width="100" alt="Image">
+            </div>
+          </div>
+        </a>
+      </nav>
+    </div>
+  </div>
+</section>
+
+
+<!-- Comments -->
+<section id="comments" class="container py-5 py-md-6">
+  <div class="row justify-content-center py-2 py-md-0">
+    <div class="col-lg-8 col-md-10">
+
+      <!-- Comment form -->
+      <h4 class="h1 text-center pt-4 pt-md-5 mb-5 pb-md-2">¡Comparte tu opinión y únete a la conversación! 🧠💭</h4>
+
+      <form #comentarioForm="ngForm" (ngSubmit)="agregarComentario(comentarioForm)" class="needs-validation">
+        <div class="row">
+          <div class="col-sm-6 mb-4">
+            <label for="cf-name" class="form-label-lg">Nombre *</label>
+            <input type="text" id="nombre" class="form-control form-control-lg" placeholder="Tu nombre o seudonimo"
+              required name="nombre" [(ngModel)]="comentario.nombre">
+            <div class="invalid-feedback">Por favor indicanos un nombre o seudonimo para identificarte en los
+              comentarios.</div>
+          </div>
+          <div class="col-sm-6 mb-4">
+            <label for="cf-email" class="form-label-lg">Email *</label>
+            <input type="email" id="email" class="form-control form-control-lg" placeholder="Email" required
+              name="email" [(ngModel)]="comentario.email">
+
+            <div class="invalid-feedback">Por favor Ingrese un email valido, este no sera publico a los demas usuarios.
+            </div>
+          </div>
+        </div>
+        <div class="mb-4">
+          <label for="cf-comment" class="form-label-lg">Tu comentario *</label>
+          <textarea id="comentario" class="form-control form-control-lg" rows="4" placeholder="Escribe tu opinión aqui."
+            required name="comentario" [(ngModel)]="comentario.comentario"></textarea>
+          <div class="invalid-feedback">Por Favor Escriba su comentario.</div>
+        </div>
+        <div class="row justify-content-center pt-3">
+          <div class="col-xl-4 col-lg-5 col-md-6 col-sm-5">
+            <button type="submit" class="btn btn-primary btn-lg w-100">Comentar</button>
+          </div>
+        </div>
+      </form>
+
+
+      <h2 class="h1 text-center mb-5 pb-md-2">{{post.comentarios.length}} Comentarios</h2>
+
+      <!-- Comment -->
+      <div class="comment mb-5 pb-md-2" *ngFor="let item of post.comentarios">
+        <div class="row">
+          <div class="col-lg-3 col-sm-3 mb-sm-0 mb-3">
+            <div class="mb-2 fs-lg text-dark fw-bold">{{item.nombre}}</div>
+            <span class="fs-sm text-muted">{{item.createdAt |date:'longDate'}}</span>
+          </div>
+          <div class="col">
+            <p class="mb-3"> {{item.comentario}}</p>
+            <div class="nav-muted">
+              <a class="nav-link p-0" href="#">
+                <i class="ci-comment align-middle me-2"></i>
+                Reply
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Relacionados posts -->
+
+<section class="bg-secondary pt-5 pt-md-6 pb-5">
+  <div class="container pt-3 pt-md-0 pb-md-3">
+    <div class="d-flex align-items-center justify-content-between mb-5 pb-sm-2">
+      <h2 class="h1 mb-0">Temas de Interes</h2>
+      <a [routerLink]="['/blog/post_list']" class="btn btn-outline-primary">Ver todos Los Post</a>
+    </div>
+    <div class="tns-carousel-wrapper tns-nav-inverse">
+      <div class="tns-carousel-inner" data-carousel-options='{
+            "controls": false,
+            "gutter": 30,
+            "responsive": {
+              "0": { "items": 1 },
+              "576": { "items": 2 }
+            }
+          }'>
+        <!-- Post -->
+        <article class="pb-5" *ngFor="let item of postsRecomendados">
+          <div class="image-scale card shadow card-hover border-0 h-100">
+            <a [routerLink]="['/blog/'+item.slug]" class="image-inner card-img-top">
+              <!-- <img [src]="item.portada" alt="Image"> -->
+              <img [src]="getCloudinaryImageUrl(item.portada, 500, 150, 'fill')" alt="Product image">
+            </a>
+            <div class="card-body">
+              <h3 class="h5 mb-2 pb-1">
+                <a [routerLink]="['/blog/'+item.slug]" class="nav-link">{{item.titulo}}</a>
+              </h3>
+              <ul class="nav nav-muted mb-2 pb-1">
+                <li class="nav-item me-2">
+                  <a href="#" class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                    {{item.categoria.titulo}}
+                  </a>
+                  <span class="text-border px-1">|</span>
+                </li>
+                <li class="nav-item me-2">
+                  <a href="#" class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                    {{item.createdAt | date:'longDate'}}
+                  </a>
+                  <span class="text-border px-1">|</span>
+                </li>
+                <li class="nav-item me-2">
+                  <a href="#" class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                    <i class="ci-chat mt-n1 me-2 fs-base align-middle"></i>
+                    No comments
+                  </a>
+                </li>
+              </ul>
+              <div class="col-lg-12 col-md-12 mb-md-0 mb-4" [innerHTML]="item.descripcion">
+              </div>
+            </div>
+          </div>
+        </article>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subscription CTA -->
+<!-- 
+  <section class="bg-secondary py-5">
+    <div class="container pt-2 pt-md-3 pb-3">
+      <div class="row align-items-center">
+        <form class="col-md-6 col-xl-5 needs-validation" novalidate>
+          <h2 class="h1 mb-3">Subscribe for updates</h2>
+          <p class="text-muted fs-lg pb-3 mb-4">Subscribe for exclusive early sale access and new arrivals.</p>
+          <div class="mb-2">
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-women" checked>
+              <label for="s-women" class="btn-control-label">Women</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-men">
+              <label for="s-men" class="btn-control-label">Men</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-girls">
+              <label for="s-girls" class="btn-control-label">Girls</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-boys">
+              <label for="s-boys" class="btn-control-label">Boys</label>
+            </div>
+          </div>
+          <div class="mb-4 pt-4">
+            <label for="s-email" class="form-label-lg">Email</label>
+            <div class="input-group input-group-lg">
+              <input type="email" id="s-email" class="form-control" placeholder="Your email address" required>
+              <button type="submit" class="btn btn-primary px-4">Subscribe</button>
+            </div>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="s-agree" class="form-check-input">
+            <label for="s-agree" class="form-check-label fs-base">I agree to receive communications from Createx Store.</label>
+          </div>
+        </form>
+        <div class="col-md-6 col-xl-7 d-none d-md-block">
+          <div class="ms-auto" style="max-width: 459px;">
+            <img src="../assets/img/ecommerce/subscribe-illustration.png" class="d-block" alt="Illustration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  -->
+
+<app-footer></app-footer>

@@ -1,0 +1,1058 @@
+<app-nav></app-nav>
+
+<div class="card" style="margin-top: 160px;">
+
+  <div class="card-header">
+    <div class="row step-menu">
+      <!-- Paso 1 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 1}" (click)="changeOp(1)">
+          <a>
+            <i class="fa-solid fa-map-location-dot"></i>
+            <span>Paso 1</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 2 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 2}" (click)="changeOp(2)">
+          <a>
+            <i class="fa-solid fa-plug"></i>
+            <span>Paso 2</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 3 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 3}" (click)="changeOp(3)">
+          <a>
+            <i class="fas fa-solar-panel"></i> <!-- Icono de panel solar -->
+            <span>Paso 3</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 4 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 4}" (click)="changeOp(4)">
+          <a>
+            <i class="fa-solid fa-microchip"></i>
+            <span>Paso 4</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 5 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 5}" (click)="changeOp(5)">
+          <a>
+            <i class="fa-solid fa-car-battery"></i>
+            <span>Paso 5</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 6 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 6}" (click)="changeOp(6)">
+          <a>
+            <i class="fa-solid fa-bolt-lightning"></i>
+            <span>Paso 6</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 7 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 8}" (click)="changeOp(8)">
+          <a>
+            <i class="fas fa-chart-line"></i> <!-- Icono de gráfico -->
+            <span>Paso 7</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Paso 8 -->
+      <div class="col-1 col-md-1">
+        <div class="step-item" [ngClass]="{'active-step': op == 7}" (click)="changeOp(7)">
+          <a>
+            <i class="fa-solid fa-floppy-disk"></i>
+            <span>Paso 8</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- <div class="card-header">
+
+    <div class="row">
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 1}" (click)="changeOp(1)">
+          <a>
+            <span class="avatar-number">1</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 2}" (click)="changeOp(2)">
+          <a>
+            <span class="avatar-number">2</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 3}" (click)="changeOp(3)">
+          <a>
+            <span class="avatar-number">3</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 4}" (click)="changeOp(4)">
+          <a>
+            <span class="avatar-number">4</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 5}" (click)="changeOp(5)">
+          <a>
+            <span class="avatar-number">5</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 6}" (click)="changeOp(6)">
+          <a>
+            <span class="avatar-number">6</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-1 col-md-1">
+        <div class="avatar" [ngClass]="{'active': op == 7}" (click)="changeOp(7)">
+          <a>
+            <span class="avatar-number">7</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div> -->
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="ps-tabs">
+
+          <div class="ps-tab" [ngClass]="{'active': op == 1}">
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fa-solid fa-map-location-dot" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Ubicación
+              </h4>
+            </div>
+
+
+            <!-- Inician Filtros -->
+            <!-- <h4>Seleccione con que tipo de productos desea ralizar los calculos</h4>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                (change)="changeRadio()" value="favoritos" [(ngModel)]="filtro">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Solo Equipos de mis proveedores Favoritos
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                value="propios" (change)="changeRadio()" [(ngModel)]="filtro">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Solo mis propios Equipos
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                (change)="changeRadio()" [(ngModel)]="filtro" value="ubicacion">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Equipos Cercanos al punto de Instalación, (Default, radio de 30K)
+              </label>
+            </div>
+
+            <div class="col-lg-6 form-group">
+              <label for="">Ampliar Radio (Radio en Kilometros)</label>
+              <input type="number" class="form-control" placeholder="Radio" required name="radio"
+                [(ngModel)]="radio_busqueda" (ngModelChange)="cambioRadio()">
+            </div> -->
+
+            <!-- Finalizan los filtros -->
+
+            <div class="map-container">
+              <div class="map-frame">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+          <!--Finaliza mapa  -->
+          <!--Inicia Ingreso De Potencias  -->
+
+          <div class="ps-tab" [ngClass]="{'active': op == 2}">
+
+            <ng-container *ngIf="calculo.tipo=='potencias'">
+
+              <form #registroForm="ngForm">
+                <div class="card-header d-flex align-items-center py-2"
+                  style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+                  <i class="fa-solid fa-plug" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+                  <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                    Potencias
+                  </h4>
+                </div>
+
+                <div class="card-body">
+
+
+
+                  <div class="row">
+
+
+                    <div class="col-lg-3 form-group"
+                      [ngClass]="{'invalid-field': nombre_equipo0Field?.invalid && (nombre_equipo0Field?.dirty || nombre_equipo0Field?.touched)}">
+                      <label for="">Nombre *</label>
+                      <input type="text" class="form-control" placeholder="Nombre" required name="nombre_equipo"
+                        [(ngModel)]="nombre_equipo0" #nombre_equipo0Field="ngModel">
+                      <div
+                        *ngIf="nombre_equipo0Field?.invalid && (nombre_equipo0Field?.dirty || nombre_equipo0Field?.touched)">
+                        <div *ngIf="nombre_equipo0Field?.errors?.['required']">El nombre es requerido</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 form-group">
+                      <label for="">Potencia (W) *</label>
+                      <input type="number" class="form-control" placeholder="Potencia" required name="potencia0"
+                        [(ngModel)]="potencia0" #potencia0Field="ngModel" [min]="1" (ngModelChange)="cambio(potencia0)">
+
+                      <div *ngIf="potencia0Field?.invalid && (potencia0Field?.dirty || potencia0Field?.touched)">
+                        <div *ngIf="potencia0Field?.errors?.['required']">La potencia es requerida</div>
+                        <div *ngIf="potencia0Field?.errors?.['min'] || potencia0Field?.errors?.['max']">La potencia
+                          minima es 1</div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-3 form-group">
+                      <label for="">Cantidad *</label>
+                      <input type="number" class="form-control" placeholder="Cantidad" required name="cantidad0"
+                        [(ngModel)]="cantidad0" #cantidad0Field="ngModel" [min]="1" (ngModelChange)="cambio(cantidad0)">
+
+                      <div *ngIf="cantidad0Field?.invalid && (cantidad0Field?.dirty || cantidad0Field?.touched)">
+                        <div *ngIf="cantidad0Field?.errors?.['required']">La cantidad es requerida</div>
+                        <div *ngIf="cantidad0Field?.errors?.['min'] || cantidad0Field?.errors?.['max']">La cantidad
+                          minima es 1</div>
+                      </div>
+
+                    </div>
+                    <div class="col-lg-3 form-group">
+                      <label for="">Uso diario (H) *</label>
+                      <input type="number" class="form-control" placeholder="Cantidad" required name="horas_uso_dia0"
+                        [(ngModel)]="horas_uso_dia0" #horasUsoDia0Field="ngModel" [min]="1" [max]="24"
+                        (ngModelChange)="cambio(horas_uso_dia0)">
+                      <div
+                        *ngIf="horasUsoDia0Field?.invalid && (horasUsoDia0Field?.dirty || horasUsoDia0Field?.touched)">
+                        <div *ngIf="horasUsoDia0Field?.errors?.['required']">Las horas de uso diario son
+                          requeridas.</div>
+                        <div *ngIf="horasUsoDia0Field?.errors?.['min'] || horasUsoDia0Field?.errors?.['max']">Las
+                          horas de uso diario deben estar entre 1 y 24.</div>
+                      </div>
+                    </div>
+
+
+                    <!-- <div class="col-lg-3 form-group">
+                                <label for="">Uso*</label>                
+                                  <button
+                                  class="btn btn-primary btn-shadow" data-toggle="modal" data-target="#agregarHorasUso">Agregar Horas de Uso</button>                
+                              </div> -->
+
+                    <!-- Inicial Modal Tiempo De uso -->
+
+                    <div class="modal fade" id="agregarHorasUso" tabindex="-1" role="dialog" style="display: none;"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-card card" data-list="{&quot;valueNames&quot;: [&quot;name&quot;]}">
+                            <div class="card-header">
+
+                              <!-- Title -->
+                              <h4 class="card-header-title" id="exampleModalCenterTitle">
+                                Tiempos de Uso Electrodomestico
+                              </h4>
+
+                              <!-- Close -->
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                              </button>
+
+                            </div>
+
+                            <div class="card-body">
+                              <p>Elija los Intervalos de tiempo en los cuales usa el Dispositivo</p>
+
+                            </div>
+                            <div class="modal-footer">
+                              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                  <button type="button" class="btn btn-danger" (click)="eliminar(item._id)">Eliminar</button> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Finaliza Modal Tiempos de uso  -->
+
+                  </div>
+                  <button [disabled]="registroForm.invalid" *ngIf="!editando" class="btn btn-primary btn-shadow"
+                    type="submit" (click)="addCampo()">Agregar</button>
+
+                  <button [disabled]="registroForm.invalid" *ngIf="editando" class="btn btn-primary btn-shadow"
+                    type="submit" (click)="guardarEditarCampo()">Guardar</button>
+
+                  <div class="col-lg-12 form-group">
+                    <label for="">Acontinuación se muestra la tension del sistema (Baterias) sugerida, la
+                      puede cambiar de acuerdo a sus preferencias.</label>
+                    <select class="form-control custom-select" id="select-tension" required name="panel"
+                      [(ngModel)]="tension_sistema" (change)="actualizarTension()">
+                      <option value=12 selected> 12V</option>
+                      <option value=24> 24V</option>
+                      <option value=48> 48V</option>
+                    </select>
+                  </div>
+
+                </div>
+              </form>
+
+              <div class="row justify-content-center" id="potenciasAgregadas">
+                <div class="card mt-30 mb-30">
+                  <div class="table-responsive">
+                    <table class="table table-hover table-nowrap table-sm" name="tabla">
+                      <thead>
+                        <tr>
+                          <th>Equipo</th>
+                          <th>Potencia</th>
+                          <th>Cantidad</th>
+                          <th>Consumo por horas</th>
+                          <th>Horas Uso Diario</th>
+                          <th>Consumo total Diario</th>
+                          <th>Opciones</th>
+                        </tr>
+                      </thead>
+                      <tbody class="font-size-base">
+                        <tr *ngFor="let item of valores; index as i">
+                          <td>
+                            {{item.nombre}}
+                          </td>
+                          <td>
+                            {{item.potencia}}
+                          <td>
+                            {{item.cantidad}}
+                          </td>
+                          <td>
+                            {{item.w_totales}}
+                          </td>
+                          <td>
+                            {{item.horas_dia}}
+                          </td>
+                          <td>
+                            {{item.consumo_diario}}
+                          </td>
+                          <td>
+                            <button class="btn btn-primary btn-shadow" (click)="editarFila(item)">Editar</button>
+                            <button class="btn btn-danger btn-shadow" (click)="borrar(item.codigo)">Eliminar</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="calculo.tipo=='facturas'">
+              <div class="col-12 col-lg-12 col-xl-12">
+                <!-- #actualizarForm="ngForm" (ngSubmit)="actualizar(actualizarForm)" -->
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row mb-3">
+                      <div class="col-12">
+                        <h4 class="card-header-title">
+                          Agregue aqui los Consumos de los ultimos 6 Meses indicados en su factura de
+                          Energía(KWh)
+
+                        </h4>
+                        <hr>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 1</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_1" [(ngModel)]="consumos_mes.mes_1"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 2</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_2" [(ngModel)]="consumos_mes.mes_2"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 3</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_3" [(ngModel)]="consumos_mes.mes_3"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 4</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_4" [(ngModel)]="consumos_mes.mes_4"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 5</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_5" [(ngModel)]="consumos_mes.mes_5"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="inputEmail3" class="col-sm-6 col-form-label">Mes 6</label>
+                      <div class="col-sm-6">
+                        <input type="number" class="form-control" name="mes_6" [(ngModel)]="consumos_mes.mes_6"
+                          (keyup)="onKey($event)">
+                      </div>
+                    </div>
+
+
+
+                    <div class="col-lg-12 form-group">
+                      <label for="">Acontinuación se muestra la tension del sistema (Baterias) sugerida, la
+                        puede cambiar de acuerdo a sus preferencias.</label>
+                      <select class="form-control custom-select" id="select-tension" required name="panel"
+                        [(ngModel)]="tension_sistema" (change)="actualizarTension()">
+                        <option value=12 selected> 12V</option>
+                        <option value=24> 24V</option>
+                        <option value=48> 48V</option>
+                      </select>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+            </ng-container>
+
+          </div>
+          <!-- Finalizan Potencias -->
+
+          <!--Inician Paneles  -->
+          <div class="ps-tab" [ngClass]="{'active': op == 3}">
+
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fas fa-solar-panel" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Paneles
+              </h4>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12 form-group">
+                <label for="">Paneles Disponibles</label>
+                <select class="form-control custom-select" id="select-tension" required name="panel" [(ngModel)]="panel"
+                  (change)="buscar_imagen_panel(panel)">
+                  <option value="0" selected disabled> Seleccionar</option>
+                  <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                  <option value="{{item._id}}" *ngFor="let item of paneles_bd">
+                    {{item.modelo}}//{{item.nombreOficina}}</option>
+                </select>
+              </div>
+
+              <!-- <div class="col-3">
+                <div class="form-group" *ngIf="panelResult">
+                  <label for="panelesSerie">Series</label>
+                  <input type="number" class="form-control" required disabled placeholder="Series" name="panelesSerie"
+                    [(ngModel)]="panelResult.paneles_serie">
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group" *ngIf="panelResult">
+                  <label for="panelesParalelo">Paralelos</label>
+                  <input type="number" class="form-control" required disabled placeholder="Paralelos"
+                    name="panelesParalelo" [(ngModel)]="panelResult.paneles_paralelo">
+                </div>
+              </div>
+
+
+              <div class="col-3">
+                <div class="form-group" *ngIf="panelResult">
+                  <label for="AmperajeArray">Amperaje Array</label>
+                  <input type="number" class="form-control" disabled placeholder="Paralelos" name="AmperajeArray"
+                    [(ngModel)]="panelResult.intensidadMaxiaGenerador">
+                </div>
+              </div>
+
+              <div class="col-3">
+                <div class="form-group" *ngIf="panelResult">
+                  <label for="VoltajeArray">Voltaje Array</label>
+                  <input type="number" class="form-control" placeholder="Paralelos" name="VoltajeArray" disabled
+                    [(ngModel)]="panelResult.tensionMaxiaGenerador">
+                </div>
+              </div> -->
+
+            </div>
+            <!-- 
+            <div class="col-lg-6 form-group">
+              <div class="col-12 col-lg-6 col-xl">
+    
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row align-items-center gx-0">
+                      <div class="col">
+
+                   
+                        <h6 class="text-uppercase text-body-secondary mb-2">
+                          Minimos Paneles
+                        </h6>
+
+                    
+                        <span class="h2 mb-0">
+                          {{numero_paneles}} Unidades
+                        </span>
+
+                      </div>
+                    </div> 
+
+                  </div>
+                </div>
+
+              </div>
+            </div> -->
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <img [src]="portada_panel" class="img-thumbnail" alt="Rounded image">
+              </div>
+
+              <div class="col-lg-6 form-group">
+                <p class="menu-title">Caracteristicas</p>
+                <div class="menu-item">
+                  <i class="fa-solid fa-w"></i> Potencia: {{panel_seleccionado.potencia}} W
+                </div>
+
+                <div class="menu-item">
+                  <i class="fas fa-grip-lines"></i> VMPP: {{panel_seleccionado.vmpp}} V
+                </div>
+                <div class="menu-item">
+                  <i class="fas fa-bolt"></i> IMPP: {{panel_seleccionado.impp}} A
+                </div>
+                <div class="menu-item">
+                  <i class="fas fa-grip-lines"></i> VOC: {{panel_seleccionado.voc}} V
+                </div>
+                <div class="menu-item">
+                  <i class="fas fa-bolt"></i> ISC: {{panel_seleccionado.isc}} A
+                </div>
+              </div>
+
+              <div class="col-8">
+                <div>
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ficha_tecnica"
+                    [innerHTML]="descripcion_panel">
+                  </div>
+                </div>
+              </div>
+              <h4>Diseñe Aqui su Array Fotovoltaico</h4>
+              <app-arreglos [valorPanel]="valorPanel" [cantidadPaneles]="cantidadPaneles"
+                [datosPanel]="panel_seleccionado" (ArrayChange)="cambioArray($event)">
+              </app-arreglos>
+
+
+            </div>
+          </div>
+          <!--Finalizan Paneles  -->
+
+          <!--Inicia Controlador  -->
+          <div class="ps-tab" [ngClass]="{'active': op == 4}">
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fa-solid fa-microchip" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Controlador
+              </h4>
+            </div>
+
+            <div class="col-lg-12 form-group">
+              <label for="">Controladores Disponibles</label>
+              <select class="form-control custom-select" id="controladorseleccionado" required name="amperaje"
+                [(ngModel)]="amperaje" (change)="buscar_imagen_controlador(amperaje)">
+                <option value="0" selected disabled>Seleccionar</option>
+                <option value="{{item._id}}" *ngFor="let item of controladores_bd; let indice=index">
+                  {{item.modelo}} //{{item.nombreOficina}}</option>
+              </select>
+            </div>
+            <div class="col-lg-12 form-group">
+              <label for="">Seleccione una Opción de trabajo</label>
+              <select class="form-control custom-select" id="svp" required name="vps"
+                [(ngModel)]="voltage_potencia_controlador_seleccion" (change)="asignar_voltaje_potencia()">
+                <option value="0" selected disabled>Seleccionar</option>
+                <option value="{{indice}}" *ngFor="let item of max_potencia_paneles; let indice=index">
+                  Tensión Baterías: {{item.tension}}V/Max_PV_Input_Voltage:
+                  {{item.max_pv_input_voltaje}}V/Max_Pv_Power {{item.max_pv_input_power}}W</option>
+              </select>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <img [src]="portada_controlador" class="img-thumbnail" alt="Rounded image">
+              </div>
+
+              <div class="col-lg-6 form-group">
+                <p class="menu-title">Caracteristicas</p>
+                <div class="menu-item">
+                  <i class="fa-solid fa-gear"></i> Tensión/Potencia:
+                </div>
+                <div class="menu-item" *ngFor="let item of max_potencia_paneles; let indice=index">
+                  Tensión Baterías: {{item.tension}}V/Max_PV_Input_Voltage:
+                  {{item.max_pv_input_voltaje}}V/Max_Pv_Power {{item.max_pv_input_power}}W
+                </div>
+
+                <div class="menu-item">
+                  <i class="fas fa-bolt"></i> Amperaje: {{controlador_seleccionado.amperaje}} A
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-lg-12">
+              <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 " [innerHTML]="descripcion_controlador">
+              </div>
+            </div>
+
+            <!-- <h4>Voltaje {{voltajeHijo}}</h4>
+            <h4>Amperaje {{amperajeHijo}}</h4>
+             <h4>Potencia {{potenciaHijo}}</h4> -->
+
+          </div>
+          <!--Finaliza Controlador  -->
+
+          <!--Inicia Baterias  -->
+          <div class="ps-tab" [ngClass]="{'active': op == 5}">
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fa-solid fa-car-batteryt" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Baterias
+              </h4>
+            </div>
+            <div class="col-lg-6 form-group">
+              <label for="">Mis Baterias</label>
+              <select class="form-control custom-select" id="select-bateria_select" required name="bateria_select"
+                [(ngModel)]="bateria_select" (change)="buscar_imagen_bateria(bateria_select)">
+                <option value="0" selected disabled>Seleccionar</option>
+                <option value="{{item._id}}" *ngFor="let item of baterias_bd; let indice=index">
+                  {{item.modelo}}//{{item.nombreOficina}}</option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 form-group">
+              <label for="">Profundidad de descarga</label>
+              <select class="form-control custom-select" id="select-profundidad" required [(ngModel)]="profundidad"
+                name="profundidad" (change)="calcularBaterias()"><!-- -->
+                <option value="0" selected disabled>Seleccionar</option>
+                <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                <option [ngValue]=0.10>10% </option>
+                <option [ngValue]=0.20>20%</option>
+                <option [ngValue]=0.30>30%</option>
+                <option [ngValue]=0.40>40% </option>
+                <option [ngValue]=0.50>50% </option>
+                <option [ngValue]=0.60>60%</option>
+                <option [ngValue]=0.70>70% Recomendada</option>
+                <option [ngValue]=0.80>80%</option>
+                <option [ngValue]=0.90>90% Menor vida Util</option>
+                <option [ngValue]=1>100% No Recomendada</option>
+              </select>
+            </div>
+
+            <div class="col-lg-6 form-group">
+              <label for="">Días de Autonomia</label>
+              <select class="form-control custom-select" id="select-dias" required name="dias"
+                [(ngModel)]="dias_autonomia" (change)="calcularBaterias()">
+                <option value="0" selected disabled>Seleccionar</option>
+                <!-- <option value="{{item._id}}" *ngFor="let item of categorias">{{item.titulo}}</option> -->
+                <option [ngValue]=1>1 Día Baja cantidad de Baterias</option>
+                <option [ngValue]=2>2 Días</option>
+                <option [ngValue]=3>3 Días</option>
+                <option [ngValue]=4>4 Días</option>
+                <option [ngValue]=5>5 Días</option>
+                <option [ngValue]=6>6 Días</option>
+                <option [ngValue]=7>7 Días</option>
+                <option [ngValue]=8>8 Días</option>
+                <option [ngValue]=9>9 Días</option>
+                <option [ngValue]=10>10 Días Alta Cantidad de Baterias</option>
+              </select>
+            </div>
+
+            <p>La Profundidad de Descarga (DoD) es el porcentaje de la capacidad total de la batería que se utiliza
+              antes de recargarla, por tanto a menor valor se requeriran mas baterias para el sistema,
+              el valor recomendado es de 60% ya que con esto se garantiza que la bateria mantenga un 40% de carga
+            </p>
+
+            <p>Los días de autonomia hace referencia a los días en los cuales el sistema podria llegar a funcionar sin
+              el suministro de energía por parte de los paneles Solares</p>
+            <!--  -->
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <img [src]="portada_bateria" class="img-thumbnail" alt="Rounded image">
+              </div>
+
+              <div class="col-lg-6 form-group">
+                <p class="menu-title">Caracteristicas</p>
+                <div class="menu-item">
+                  <i class="fas fa-grip-lines"></i> Voltaje: {{bateria_seleccionado.voltaje}} V
+                </div>
+
+                <div class="menu-item">
+                  <i class="fas fa-bolt"></i> Ah: {{bateria_seleccionado.amperaje}}
+                </div>
+
+                <div class="menu-item">
+                  <i class="fa-solid fa-microchip"></i> Tecnología: {{bateria_seleccionado.tecnologia}}
+                </div>
+                <div class="menu-item">
+                  <i class="fa-solid fa-scale-unbalanced-flip"></i>Peso: {{bateria_seleccionado.peso}}Kg
+                </div>
+
+              </div>
+
+            </div>
+            <!--  -->
+
+            <div class="col-lg-12">
+              <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 " [innerHTML]="descripcion_bateria">
+              </div>
+            </div>
+
+
+          </div>
+
+          <!--Finaliza Baterias  -->
+
+          <!--Inicia Inversor  -->
+          <div class="ps-tab" [ngClass]="{'active': op == 6}">
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fa-solid fa-bolt-lightning" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Inversor
+              </h4>
+            </div>
+            <div class="col-lg-6 form-group">
+              <label for="">Mis Inversores</label>
+              <select class="form-control custom-select" id="select-inversor_select" required name="inversor"
+                [(ngModel)]="inversor" (change)="buscar_imagen_inversor(inversor)">
+                <option value="0" selected disabled>Seleccionar</option>
+                <option value="{{item._id}}" *ngFor="let item of inversores_bd; let indice=index">
+                  {{item.modelo}}//{{item.nombreOficina}}</option>
+              </select>
+            </div>
+
+
+            <!--  -->
+            <div class="row">
+              <div class="col-lg-6 form-group">
+                <img [src]="inversor_seleccionado.portada" class="img-thumbnail" alt="Rounded image">
+              </div>
+
+              <div class="col-lg-6 form-group">
+                <p class="menu-title">Caracteristicas</p>
+                <div class="menu-item">
+                  <i class="fa-solid fa-w"></i> Potencia: {{inversor_seleccionado.potencia}} W
+                </div>
+                <div class="menu-item">
+                  <i class="fas fa-grip-lines"></i> Voltaje Entrada: {{inversor_seleccionado.voltaje_in}} V/DC
+                </div>
+
+                <div class="menu-item">
+                  <i class="fas  fa-bacon"></i> Voltaje Salida: {{inversor_seleccionado.voltaje_out}} V/AC
+                </div>
+                <div class="menu-item">
+                  <i class="fa-solid fa-scale-unbalanced-flip"></i> Peso: {{inversor_seleccionado.peso}}Kg
+                </div>
+
+              </div>
+
+            </div>
+            <!--  -->
+            <div class="col-lg-12">
+              <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 col-12 "
+                [innerHTML]="inversor_seleccionado.descripcion">
+              </div>
+            </div>
+
+          </div>
+          <!--Finaliza Inversor  -->
+
+          <!--Inicia Resultados  -->
+          <div class="ps-tab" [ngClass]="{'active': op == 7}">
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fas fa-chart-line" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Guardar
+              </h4>
+            </div>
+
+
+
+            <!-- <div class="col-6 form-group">
+                <button type="submit" class="btn btn-success" (click)="guardarCalculo()">Guardar Mi
+                  Calculo</button>
+              </div> -->
+
+            <!-- <button type="submit" class="btn btn-info" [ngClass]="{'active': op == 8}" (click)="changeOp(8)">Simular
+                Sistema</button> -->
+
+
+
+            <label for="">Nombre Calculo</label>
+            <input type="text" class="form-control" placeholder="Nombre" required name="nombre_equipo"
+              [(ngModel)]="calculo.nombre" (change)="cambioNombre($event)">
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                [(ngModel)]="calculo.autoriza_correccion" [value]="true">
+              <label class="form-check-label" for="flexRadioDefault1">
+                Autorizo a que personal de empresas o expertos puedan ver y corregir mi sistema para sugerirme
+                Mejoras
+              </label>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked
+                [(ngModel)]="calculo.autoriza_correccion" [value]="false">
+              <label class="form-check-label" for="flexRadioDefault2">
+                NO autorizo correcciones en mi sistema
+              </label>
+            </div>
+            <div class="col-12 form-group">
+              <tinymce [config]="config" name="descripcion_calculo" required [(ngModel)]="calculo.descripcion">
+              </tinymce>
+            </div>
+            <button type="submit" class="btn btn-success" (click)="guardarInforme()">Generar PDF</button>
+            <button type="submit" class="btn btn-info m-2" (click)="guardarCalculo()">Guardar Mi Calculo</button>
+
+          </div>
+
+          <div class="ps-tab" [ngClass]="{'active': op == 8}">
+
+
+            <div class="card-header d-flex align-items-center py-2"
+              style="background-color: #f0f8ff; border-bottom: 2px solid #00aaff;">
+              <i class="fa-solid fa-floppy-disk" style="font-size: 1.5em; color: #00aaff; margin-right: 8px;"></i>
+              <h4 class="card-header-title mb-0" style="font-weight: bold; font-size: 1.25em; color: #333;">
+                Evaluación
+              </h4>
+            </div>
+
+
+            <div class="card-body">
+              <!--Inicia nuevo diseño  -->
+              <div class="container-fluid">
+                <div class="row">
+                  <!-- Lateral izquierdo -->
+                  <div class="col-md-3">
+                    <div class="btn-group-vertical w-100" role="group" aria-label="Months">
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(1)">Enero</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(2)">Febrero</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(3)">Marzo</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(4)">Abril</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(5)">Mayo</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(6)">Junio</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(7)">Julio</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(8)">Agosto</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(9)">Septiembre</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(10)">Octubre</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(11)">Noviembre</button>
+                      <button type="button" class="btn btn-secondary" (click)="simularSistema(12)">Diciembre</button>
+                      <!-- Agregar botones para los otros meses -->
+                    </div>
+                  </div>
+
+                  <!-- Lateral derecho -->
+                  <div class="col-md-9">
+                    <div class="row">
+                      <div class="col-lg-12"> <canvas id="ChartPrueba"></canvas></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--Finaliza Nuevo diseño  -->
+
+              <div class="row">
+
+                <div class="col-lg-6"> <canvas id="ChartInversor"></canvas></div>
+                <div class="col-lg-6"> <canvas id="ChartEstadoBateria"></canvas></div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+        </div><!--Cierre de ps-tab-->
+      </div>
+
+      <div class="col-lg-4" id="informepdf">
+
+        <div class="row">
+
+          <div class="col-lg-12">
+            <p class="menu-title">Ubicación</p>
+            <div class="menu-item">
+              <i class="fas fa-map-marker-alt"></i> Latitud: {{latitud | number:'1.2-3'}}
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-map-marker-alt"></i> Longitud: {{longitud | number:'1.3-3'}}
+            </div>
+          </div>
+
+          <div class="col-lg-12">
+            <p class="menu-title">Tensión del Sistema</p>
+            <div class="menu-item">
+              <i class="fas fa-car-battery"></i> Tensión: {{tension_sistema}} V
+            </div>
+          </div>
+
+          <div class="col-lg-12">
+            <p class="menu-title">Consumo y Energía</p>
+            <div class="menu-item">
+              <i class="fas fa-bolt"></i> Consumo Simultáneo: {{simultaneo}} W
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-sun"></i> Consumo Total Diario: {{total_dia}} W
+            </div>
+          </div>
+
+          <div class="col-lg-12" *ngIf="panelDefinido">
+            <p class="menu-title">Paneles Fotovoltaicos</p>
+
+            <div class="menu-item"
+              [ngClass]="{'text-danger': panelResult?.cantidad_paneles < cantidadPaneles, 'text-default': panelResult?.cantidad_paneles >= cantidadPaneles}">
+              <i class="fas fa-solar-panel"></i> Minimo Paneles Requeridos: {{cantidadPaneles}} Unidades
+            </div>
+
+            <div class="menu-item"
+              [ngClass]="{'text-danger': panelResult?.cantidad_paneles < cantidadPaneles, 'text-default': panelResult?.cantidad_paneles >= cantidadPaneles}">
+              <i class="fa-solid fa-circle-nodes"></i> Paneles Array: {{panelResult?.cantidad_paneles}} Unidades
+            </div>
+
+
+            <div class="menu-item">
+              <i class="fas fa-solar-panel"></i> Intensidad Salida Array: {{panelResult.amperaje_array_fv}} Ah
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-solar-panel"></i> Voltaje Salida Array: {{panelResult.voltaje_array_fv}} V
+            </div>
+            <div class="menu-item">
+              <i class="fa-solid fa-vector-square"></i>Paneles en Serie: {{panelResult.paneles_serie}} Unidades
+            </div>
+            <div class="menu-item">
+              <i class="fa-solid fa-vector-square"></i> Paneles En Paralelo: {{panelResult.paneles_paralelo}} Unidades
+            </div>
+            <div class="menu-item">
+              <i class="fa-solid fa-dumbbell"></i> Potencia Arreglo FV: {{panelResult.peakpower}} W
+            </div>
+          </div>
+
+          <div class="col-lg-12" *ngIf="panelDefinido">
+            <p class="menu-title">Controlador</p>
+            <div class="menu-item">
+              <i class="fas fa-microchip"></i> Voltaje Mín. Controlador: {{controladorResult.minVoltageControlador | number:'1.2-2' }} V
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-battery-quarter"></i> Amperaje Mín. Controlador:
+              {{controladorResult.minCorrienteControlador | number:'1.2-2' }} A
+            </div>
+          </div>
+
+
+          <div class="col-lg-12" *ngIf="bateriaResult">
+            <p class="menu-title">Baterías</p>
+            <div class="menu-item">
+              <i class="fas fa-battery-full"></i> Baterías Requeridas: {{bateriaResult.total_baterias}} Unidades
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-battery-half"></i> Baterías en Serie: {{bateriaResult.baterias_serie}} Unidades
+            </div>
+            <div class="menu-item">
+              <i class="fas fa-battery-three-quarters"></i> Baterías en Paralelo: {{bateriaResult.baterias_paralelo}}
+              Unidades
+            </div>
+          </div>
+
+          <div class="col-lg-12" *ngIf="inversorResult">
+            <p class="menu-title">Inversor</p>
+            <div class="menu-item">
+              <i class="fas fa-grip-lines"></i> V/DC Entrada: {{inversorResult.tension_sistema}} V/DC
+            </div>
+
+            <div class="menu-item">
+              <i class="fas  fa-bacon"></i> V/AC Salida: {{inversorResult.voltaje_out}} V/AC
+            </div>
+          </div>
+        </div>
+
+
+        <style>
+          .menu-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+          .menu-item {
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+          }
+
+          .menu-item i {
+            margin-right: 5px;
+          }
+        </style>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

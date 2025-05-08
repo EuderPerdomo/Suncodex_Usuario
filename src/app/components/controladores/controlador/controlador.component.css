@@ -1,0 +1,243 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*Inicia diseño de la animación 3d lamapra solar*/
+.container {
+    position: relative;
+    width: 100%;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+
+.spline-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding-top: 160px;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    /* background: rgba(255, 255, 255, 0.8); */
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 400px;
+    z-index: 10;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.spline-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.overlay-content h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 80px;
+    color: aquamarine;
+}
+
+.highlight {
+    color: #00aaff;
+}
+
+.descripcion {
+    font-size: 1.25rem;
+    color: #555;
+    margin: 20px 0;
+    font-family: "Bebas Neue", sans-serif;
+    color: aquamarine;
+}
+
+.clasex {
+    color: red;
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-size: 150px;
+}
+
+
+.btn-outline-primary {
+    border-color: #00aaff;
+    color: #00aaff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #00aaff;
+    color: #fff;
+  }
+
+  
+/*Finaliza diseño de la animación 3d lamapra solar*/
+
+/*Inician Tarjetas*/
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #f0f8ff, #e0f7fa);
+    padding: 100px 20px;
+    text-align: center;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .highlight {
+    color: #00aaff;
+  }
+  
+  .hero-text {
+    font-size: 1.25rem;
+    color: #555;
+    margin: 20px 0;
+  }
+  
+  .cta-button {
+    margin-top: 20px;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  /* Alert Section */
+  .alert-section {
+    padding: 40px 20px;
+  }
+  
+  .alert-info {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+    color: #0d47a1;
+  }
+  
+  /* Cards Section */
+  .cards-section {
+    padding: 60px 20px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin: 10px;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-img-top {
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .card-text {
+    color: #555;
+    margin-bottom: 20px;
+  }
+  
+  .btn-outline-primary {
+    border-color: #00aaff;
+    color: #00aaff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #00aaff;
+    color: #fff;
+  }
+  .card-body h3 {
+    color: aquamarine;
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    
+  }
+  
+  
+  .card-body {
+  margin: 5px;
+  }
+  
+  .card-body p {
+    font-size: 1.25rem;
+    color: #555;
+    margin: 20px 0;
+    font-family: "Bebas Neue", sans-serif;
+  }
+
+/*Finalizan tarjetas*/
+
+/*Contenedor de Spline*/
+.spline-container{
+display: flex;
+position: fixed;
+}
+/*Finaliza Contenedor de spline*/
+
+
+/********************************************************************************************************/
+/* Contenedor de Spline */
+.spline-container {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: 1; /* Asegura que esté detrás del contenido */
+    pointer-events: none; /* Permite interactuar con elementos detrás */
+  }
+  
+  /* Contenedor de tarjetas */
+  .cards-section {
+    position: relative;
+    margin-top: 100vh; /* Igual a la altura del viewport */
+    z-index: 2; /* Coloca las tarjetas sobre el spline */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
+    padding-top: 20px;
+  }
+  
+  /* Ajustes para el overlay */
+  .overlay-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    width: 80%;
+    max-width: 800px;
+  }
+  
+  /* Asegura que el footer esté sobre el spline */
+  app-footer {
+    position: relative;
+    z-index: 2;
+  }
+
+
+  .cards-section {
+    transform: translateZ(1px); /* Crea un contexto de apilamiento */
+  }
+  
+  .spline-container {
+    transform: translateZ(0);
+  }

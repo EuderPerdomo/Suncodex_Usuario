@@ -1,0 +1,189 @@
+
+<app-nav></app-nav>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+
+.spline-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.overlay-content {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    /* background: rgba(255, 255, 255, 0.8); */
+    padding: 15px;
+    border-radius: 8px;
+    max-width: 400px;
+    z-index: 10;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+}
+
+spline-viewer {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.overlay-content h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-size: 80px;
+    color: aquamarine;
+}
+
+.highlight {
+    color: #00aaff;
+}
+
+.descripcion {
+    font-size: 1.25rem;
+    color: #555;
+    margin: 20px 0;
+    font-family: "Bebas Neue", sans-serif;
+    color: aquamarine;
+}
+
+.clasex {
+    color: red;
+    font-family: "Bitter", serif;
+    font-optical-sizing: auto;
+    font-weight: weight;
+    font-style: normal;
+    font-size: 150px;
+}
+
+
+.btn-outline-primary {
+    border-color: #00aaff;
+    color: #00aaff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #00aaff;
+    color: #fff;
+  }
+
+  
+.cta-button {
+    margin-top: 20px;
+  }
+</style>
+
+  <div class="spline-container">
+      <!-- Contenido superpuesto -->
+      <div class="overlay-content">
+          <h2>Bienvenido a <span class="highlight">SunCode</span><span class="clasex">x</span></h2>
+          <p class="descripcion">Tu aliado en Energía solar.</p>
+          <!-- <a [routerLink]="['/lamparaSolar/lamparasSolares']" class="btn btn-primary btn-lg cta-button">Lamparas Solares</a> -->
+
+      </div>
+      
+      <!-- Visor Spline -->
+     <spline-viewer 
+          url="https://prod.spline.design/8JcrspJ6ui5pOo9p/scene.splinecode"
+          loading-anim-type="spinner-small"
+          events-target="global">
+      </spline-viewer> 
+      <!-- <spline-viewer 
+      url="https://prod.spline.design/NOVySJytRo2aADmt/scene.splinecode"
+      loading-anim-type="spinner-small"
+      events-target="global">
+  </spline-viewer> -->
+  </div>
+
+<!-- <spline-viewer url="https://prod.spline.design/NOVySJytRo2aADmt/scene.splinecode"></spline-viewer> -->
+
+<!-- Hero Section -->
+<!-- <div class="container-fluid hero-section">
+  <div class="row align-items-center">
+    <div class="col-md-6 hero-content">
+      <h1 class="hero-title">Bienvenido a <span class="highlight">SunCodex</span></h1>
+      <p class="hero-text">Tu aliado en soluciones inteligentes de energía solar.</p>
+      <a href="#productos" class="btn btn-primary btn-lg cta-button">Explorar Productos</a>
+    </div>
+    <div class="col-md-6 hero-image">
+      <img src="assets/img/Banner.png" alt="Paneles solares" class="img-fluid rounded">
+    </div>
+  </div>
+</div> -->
+
+<!-- Alert Section -->
+<div class="container-fluid alert-section">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">¡Bienvenido!</h4>
+    <p>
+      Aquí encontrarás una útil herramienta que te guiará paso a paso para que puedas calcular
+      cada uno de los componentes para tu sistema de energía solar. Solo necesitamos que nos indiques unos
+      cuantos datos e inmediatamente podrás descubrir qué necesitas para sumarte a la ola de la energía fotovoltaica.
+    </p>
+    <hr>
+    <p class="mb-0">¡Comienza ahora y elige la opción que mejor se adapte a tus necesidades!</p>
+  </div>
+</div>
+
+<!-- Cards Section -->
+<div class="container-fluid cards-section">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <!-- Card 1: Calculadora Avanzada -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/avanzada.jpg" class="card-img-top" alt="Calculadora Avanzada">
+        <div class="card-body">
+          <h3 class="card-title">Calculadora Avanzada</h3>
+          <p class="card-text">
+            Elige esta opción de cálculo si conoces los consumos de todos
+            los electrodomésticos que deseas alimentar con energía fotovoltaica, así como los tiempos de uso.
+          </p>
+          <a [routerLink]="['calculo/crear/potencias']" class="btn btn-outline-primary">Comenzar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2: Facturas -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/tax.jpg" class="card-img-top" alt="Facturas">
+        <div class="card-body">
+          <h3 class="card-title">Facturas</h3>
+          <p class="card-text">
+            Si no conoces los consumos de todos los equipos pero tienes una factura de energía a
+            la mano, esta es la mejor opción para ti.
+          </p>
+          <a [routerLink]="['calculo/crear/facturas']" class="btn btn-outline-primary">Comenzar</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3: Estandar -->
+    <div class="col">
+      <div class="card h-100 shadow-sm">
+        <img src="assets/img/estandar.jpg" class="card-img-top" alt="Estandar">
+        <div class="card-body">
+          <h3 class="card-title">Estandar</h3>
+          <p class="card-text">
+            Aquí te proporcionaremos diferentes electrodomésticos de uso común con sus potencias para que diseñes
+            un sistema fotovoltaico a partir de ellos.
+          </p>
+          <a [routerLink]="['calculo/interactiva']" class="btn btn-outline-primary">Comenzar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,525 @@
+<app-nav></app-nav>
+<div class="container " style="margin-top: 160px;">
+
+  <div class="row ">
+    <div class="col-12" style="margin-top: 2rem !important;">
+
+      <div class="ps-tabs">
+
+        <div class="ps-tab" [ngClass]="{'active': op == 1}">
+
+
+
+          <h1 class="display-4 text-center mb-3">
+            Iniciar Sesión
+          </h1>
+    
+          <p class="text-muted text-center mb-5">
+            Inicie Sesión en Su cuenta para acceder a la calculadora solar
+          </p>
+    
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+
+            <div class="form-group">
+
+              <label>Correo electrónico</label>
+
+              <input type="email" class="form-control" required placeholder="name@address.com" #email="ngModel"
+                name="email" [(ngModel)]="admin.email">
+
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <label>Contraseña</label>
+                </div>
+              </div>
+              <div class="input-group input-group-merge">
+                <input type="password" class="form-control form-control-appended" placeholder="Ingresa tu contraseña"
+                  id="password" #password="ngModel" name="password" [(ngModel)]="admin.password">
+                <div class="input-group-append m3">
+                  <span class="input-group-text" (click)="view_password();" style="cursor: pointer;">
+                    <i class="fa-solid fa-eye" id="ojo_icon"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <button class="btn btn-lg btn-block btn-primary m-3" type="submit">
+              Iniciar sesión
+            </button>
+
+            <p class="text-muted text-center mb-5">
+              ¿Aun no tienes una cuenta?
+            </p>
+
+          </form>
+
+          <button class="btn btn-lg btn-block btn-info mb-3" [ngClass]="{'active': op == 2}" (click)="changeOp(2)">
+            Registrarse
+          </button>
+
+        </div>
+
+
+        <!-- Opcion 2 Elegir como desea registrase-->
+
+        <div class="ps-tab" [ngClass]="{'active': op == 2}">
+
+
+          <h1 class="display-4 text-center mb-3">
+            Registrarse
+          </h1>
+    
+          <p class="text-muted text-center mb-5">
+            Registrese para acceder a la calculadora solar
+          </p>
+    
+
+          <div class="row">
+            <div class="col-12 col-md-12">
+
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <span class="h2 mb-0">
+                        CLIENTE 
+                        <span class="badge bg-success ms-2" style="font-size: 0.6em; vertical-align: middle;">
+                          GRATIS
+                        </span>
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <p class="text-center">
+                        <small class="text-muted">Elige entre diferentes opciones que te ayudaran a conocer el
+                          funcionamiento de los sistemas fotovoltaicos</small>
+                      </p>
+                      <a class="btn btn-sm btn-primary" [ngClass]="{'active': op == 3}" (click)="changeOp(3)">
+                        Registrame como cliente
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-md-12">
+
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+
+                      <span class="h2 mb-0">
+                        INSTALADOR
+                        <span class="badge bg-success ms-2" style="font-size: 0.6em; vertical-align: middle;">
+                          Subscripción Mensual
+                        </span>
+                      </span>
+
+                    </div>
+                    <div class="col-auto">
+
+                      <p class="text-center">
+                        <small class="text-muted">Realizas instaalciones fotovoltaicas, registrate como instalador,
+                          Dimensiona sistemas con productos cercanos al punto de instalación y ayuda a clientes
+                          potenciales
+                          a encontrar la configuración fotovoltaica que mas se adapte a sus nececidades </small>
+                      </p>
+
+
+                      <a class="btn btn-sm btn-primary" [ngClass]="{'active': op == 4}" (click)="changeOp(4)">Registrame
+                        como Instalador</a>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-12 col-md-12">
+
+
+              <div class="card">
+                <div class="card-body">
+                  <div class="row align-items-center">
+                    <div class="col">
+
+
+                      <span class="h2 mb-0">
+                        EMPRESA
+                        <span class="badge bg-success ms-2" style="font-size: 0.6em; vertical-align: middle;">
+                          Subscripción Mensual
+                        </span>
+                      </span>
+
+                    </div>
+                    <div class="col-auto">
+
+
+                      <p class="text-center">
+                        <small class="text-muted">Registrate como empresa,
+                          crea tus productos y encuentra clientes potenciales interesados en utilizar tus equipos.
+                        </small>
+                      </p>
+
+
+                      <a class="btn btn-sm btn-primary" [ngClass]="{'active': op == 5}" (click)="changeOp(5)">Registrame
+                        como Empresa</a>
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-12 col-md-12">
+              <a class="nav-link" (click)="changeOp(1)" style="cursor: pointer;">
+                <span class="d-inline-flex align-items-center" style="color: #FF6B35;">
+                  <i class="fas fa-arrow-circle-left me-2"></i>
+                  <span class="position-relative">
+                    ¡Ups!, ya tengo cuenta, ir a iniciar Sesión..
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.6em; transform: translate(5px, -8px)!important;">
+                      <i class="fas fa-bolt"></i>
+                    </span>
+                  </span>
+                </span>
+              </a>
+            </div>
+
+          </div>
+
+        
+
+        </div>
+
+     
+
+        <!-- Opcion 3 Es Cliente-->
+        <!-- <div class="ps-tab" [ngClass]="{'active': op == 3}">
+
+          <form #Form_registro_cliente="ngForm" (ngSubmit)="registro_cliente(Form_registro_cliente)">
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': nombresField?.invalid && (nombresField?.dirty || nombresField?.touched)}">
+              <label>Nombres *</label>
+              <input type="text" class="form-control" required placeholder="Nombres" name="nombres"
+                [(ngModel)]="cliente.nombres" #nombresField="ngModel">
+              <div *ngIf="nombresField?.invalid && (nombresField?.dirty || nombresField?.touched)">
+                <div *ngIf="nombresField?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': apellidosField?.invalid && (apellidosField?.dirty || apellidosField?.touched)}">
+              <label>Apellidos *</label>
+              <input type="text" class="form-control" required placeholder="Apellidos" name="apellidos"
+                [(ngModel)]="cliente.apellidos" #apellidosField="ngModel">
+              <div *ngIf="apellidosField?.invalid && (apellidosField?.dirty || apellidosField?.touched)">
+                <div *ngIf="apellidosField?.errors?.['required']">Los apellidos son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': dniField?.invalid && (dniField?.dirty || dniField?.touched)}">
+              <label>Documento de Identificación *</label>
+              <input type="number" class="form-control" required placeholder="Documento de identificación" name="dni"
+                [(ngModel)]="cliente.dni" #dniField="ngModel">
+              <div *ngIf="dniField?.invalid && (dniField?.dirty || dniField?.touched)">
+                <div *ngIf="dniField?.errors?.['required']">El documento de identificación es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': telefonoField?.invalid && (telefonoField?.dirty || telefonoField?.touched)}">
+              <label>Teléfono *</label>
+              <input type="number" class="form-control" required placeholder="Teléfono" name="telefono"
+                [(ngModel)]="cliente.telefono" #telefonoField="ngModel">
+              <div *ngIf="telefonoField?.invalid && (telefonoField?.dirty || telefonoField?.touched)">
+                <div *ngIf="telefonoField?.errors?.['required']">El teléfono es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': emailField?.invalid && (emailField?.dirty || emailField?.touched)}">
+              <label>Correo electrónico *</label>
+              <input type="email" class="form-control" required placeholder="name@address.com" name="email"
+                [(ngModel)]="cliente.email" #emailField="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
+              <div *ngIf="emailField?.invalid && (emailField?.dirty || emailField?.touched)">
+                <div *ngIf="emailField?.errors?.['required']">El correo electrónico es requerido</div>
+                <div *ngIf="emailField?.errors?.['email']">El correo electrónico debe tener un formato válido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': passwordField?.invalid && (passwordField?.dirty || passwordField?.touched)}">
+              <label>Contraseña *</label>
+              <div class="input-group input-group-merge">
+                <input type="password" class="form-control" required placeholder="Ingresa tu contraseña" name="password"
+                  id="passwordregistrocliente" [(ngModel)]="cliente.password" #passwordField="ngModel"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                <div class="input-group-append">
+                  <span class="input-group-text" (click)="view_passwordd('passwordregistrocliente');"
+                    style="cursor: pointer;">
+                    <i class="fe fe-eye"></i>
+                  </span>
+                </div>
+
+                <div *ngIf="passwordField?.invalid && (passwordField?.dirty || passwordField?.touched)">
+                  <div *ngIf="passwordField?.errors?.['required']">La contraseña es requerida</div>
+                  <div *ngIf="passwordField?.errors?.['pattern']">
+                    La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al
+                    menos 8 caracteres
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <button [disabled]="Form_registro_cliente.invalid" class="btn btn-lg btn-block btn-primary mb-3"
+              type="submit">
+              Registrarse
+            </button>
+
+          </form>
+
+        </div> -->
+        <!-- Opcion 4 Es Instalador-->
+        <!-- <div class="ps-tab" [ngClass]="{'active': op == 4}">
+
+          <form #Form_registro_instalador="ngForm" (ngSubmit)="registro_instalador(Form_registro_instalador)">
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': nombresFieldInstala?.invalid && (nombresFieldInstala?.dirty || nombresFieldInstala?.touched)}">
+              <label>Nombres *</label>
+              <input type="text" class="form-control" required placeholder="Nombres" name="nombres"
+                [(ngModel)]="cliente.nombres" #nombresFieldInstala="ngModel">
+              <div *ngIf="nombresFieldInstala?.invalid && (nombresFieldInstala?.dirty || nombresFieldInstala?.touched)">
+                <div *ngIf="nombresFieldInstala?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': apellidosFieldInstala?.invalid && (apellidosFieldInstala?.dirty || apellidosFieldInstala?.touched)}">
+              <label>Apellidos *</label>
+              <input type="text" class="form-control" required placeholder="Apellidos" name="apellidos"
+                [(ngModel)]="cliente.apellidos" #apellidosFieldInstala="ngModel">
+              <div
+                *ngIf="apellidosFieldInstala?.invalid && (apellidosFieldInstala?.dirty || apellidosFieldInstala?.touched)">
+                <div *ngIf="apellidosFieldInstala?.errors?.['required']">Los apellidos son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': dniFieldInstala?.invalid && (dniFieldInstala?.dirty || dniFieldInstala?.touched)}">
+              <label>Documento de Identificación *</label>
+              <input type="number" class="form-control" required placeholder="Documento de identificación" name="dni"
+                [(ngModel)]="cliente.dni" #dniFieldInstala="ngModel">
+              <div *ngIf="dniFieldInstala?.invalid && (dniFieldInstala?.dirty || dniFieldInstala?.touched)">
+                <div *ngIf="dniFieldInstala?.errors?.['required']">El documento de identificación es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': telefonoFieldInstala?.invalid && (telefonoFieldInstala?.dirty || telefonoFieldInstala?.touched)}">
+              <label>Teléfono *</label>
+              <input type="number" class="form-control" required placeholder="Teléfono" name="telefono"
+                [(ngModel)]="cliente.telefono" #telefonoFieldInstala="ngModel">
+              <div
+                *ngIf="telefonoFieldInstala?.invalid && (telefonoFieldInstala?.dirty || telefonoFieldInstala?.touched)">
+                <div *ngIf="telefonoFieldInstala?.errors?.['required']">El teléfono es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': emailFieldInstala?.invalid && (emailFieldInstala?.dirty || emailFieldInstala?.touched)}">
+              <label>Correo electrónico *</label>
+              <input type="email" class="form-control" required placeholder="name@address.com" name="email"
+                [(ngModel)]="cliente.email" #emailFieldInstala="ngModel"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
+              <div *ngIf="emailFieldInstala?.invalid && (emailFieldInstala?.dirty || emailFieldInstala?.touched)">
+                <div *ngIf="emailFieldInstala?.errors?.['required']">El correo electrónico es requerido</div>
+                <div *ngIf="emailFieldInstala?.errors?.['email']">El correo electrónico debe tener un formato válido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': passwordfieldInstala?.invalid && (passwordfieldInstala?.dirty || passwordfieldInstala?.touched)}">
+              <label>Contraseña *</label>
+              <div class="input-group input-group-merge">
+                <input type="password" class="form-control" required placeholder="Ingresa tu contraseña" name="password"
+                  id="passwordregistroinstalador" [(ngModel)]="cliente.password" #passwordfieldInstala="ngModel"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                <div class="input-group-append">
+                  <span class="input-group-text" (click)="view_passwordd('passwordregistroinstalador');"
+                    style="cursor: pointer;">
+                    <i class="fe fe-eye"></i>
+                  </span>
+                </div>
+
+                <div
+                  *ngIf="passwordfieldInstala?.invalid && (passwordfieldInstala?.dirty || passwordfieldInstala?.touched)">
+                  <div *ngIf="passwordfieldInstala?.errors?.['required']">La contraseña es requerida</div>
+                  <div *ngIf="passwordfieldInstala?.errors?.['pattern']">
+                    La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al
+                    menos 8 caracteres
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <button [disabled]="Form_registro_instalador.invalid" class="btn btn-lg btn-block btn-primary mb-3"
+              type="submit">
+              Registrarse
+            </button>
+          </form>
+        </div> -->
+        <!-- Opcion 5 Es Empresa-->
+        <!-- <div class="ps-tab" [ngClass]="{'active': op == 5}">
+          <form #form_registro_empresario="ngForm" (ngSubmit)="registro_empresario(form_registro_empresario)">
+
+
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': nombresFieldEmpresa?.invalid && (nombresFieldEmpresa?.dirty || nombresFieldEmpresa?.touched)}">
+              <label>Nombres Representante Legal *</label>
+              <input type="text" class="form-control" required placeholder="Nombres" name="nombres"
+                [(ngModel)]="empresa.nombres" #nombresFieldEmpresa="ngModel">
+              <div *ngIf="nombresFieldEmpresa?.invalid && (nombresFieldEmpresa?.dirty || nombresFieldEmpresa?.touched)">
+                <div *ngIf="nombresFieldEmpresa?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': apellidosFieldEmpresa?.invalid && (apellidosFieldEmpresa?.dirty || apellidosFieldEmpresa?.touched)}">
+              <label>Apellidos *</label>
+              <input type="text" class="form-control" required placeholder="Apellidos" name="apellidos"
+                [(ngModel)]="empresa.apellidos" #apellidosFieldEmpresa="ngModel">
+              <div
+                *ngIf="apellidosFieldEmpresa?.invalid && (apellidosFieldEmpresa?.dirty || apellidosFieldEmpresa?.touched)">
+                <div *ngIf="apellidosFieldEmpresa?.errors?.['required']">Los apellidos son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': dniLegalFieldEmpresa?.invalid && (dniLegalFieldEmpresa?.dirty || dniLegalFieldEmpresa?.touched)}">
+              <label>Documento de Identificación Representante Legal *</label>
+              <input type="number" class="form-control" required placeholder="Documento de identificación" name="dni"
+                [(ngModel)]="empresa.dni" #dniLegalFieldEmpresa="ngModel">
+              <div
+                *ngIf="dniLegalFieldEmpresa?.invalid && (dniLegalFieldEmpresa?.dirty || dniLegalFieldEmpresa?.touched)">
+                <div *ngIf="dniLegalFieldEmpresa?.errors?.['required']">El documento de identificación es requerido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': telefonoFieldEmpresa?.invalid && (telefonoFieldEmpresa?.dirty || telefonoFieldEmpresa?.touched)}">
+              <label>Teléfono *</label>
+              <input type="number" class="form-control" required placeholder="Teléfono" name="telefono"
+                [(ngModel)]="empresa.telefono" #telefonoFieldEmpresa="ngModel">
+              <div
+                *ngIf="telefonoFieldEmpresa?.invalid && (telefonoFieldEmpresa?.dirty || telefonoFieldEmpresa?.touched)">
+                <div *ngIf="telefonoFieldEmpresa?.errors?.['required']">El teléfono es requerido</div>
+              </div>
+            </div>
+
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': nombresFieldEmpresa?.invalid && (nombresFieldEmpresa?.dirty || nombresFieldEmpresa?.touched)}">
+              <label>Nombre Empresa *</label>
+              <input type="text" class="form-control" required placeholder="Nombre o razon Social Empresa"
+                name="nombres" [(ngModel)]="empresa.nombre_empresa" #nombresFieldEmpresa="ngModel">
+              <div *ngIf="nombresFieldEmpresa?.invalid && (nombresFieldEmpresa?.dirty || nombresFieldEmpresa?.touched)">
+                <div *ngIf="nombresFieldEmpresa?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': direccionppalFieldEmpresa?.invalid && (direccionppalFieldEmpresa?.dirty || direccionppalFieldEmpresa?.touched)}">
+              <label>Dirección Principal Empresa *</label>
+              <input type="text" class="form-control" required placeholder="Dirección" name="direccion_empresa"
+                [(ngModel)]="empresa.direccion_empresa" #direccionppalFieldEmpresa="ngModel">
+              <div
+                *ngIf="direccionppalFieldEmpresa?.invalid && (direccionppalFieldEmpresa?.dirty || direccionppalFieldEmpresa?.touched)">
+                <div *ngIf="direccionppalFieldEmpresa?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': nitFieldEmpresa?.invalid && (nitFieldEmpresa?.dirty || nitFieldEmpresa?.touched)}">
+              <label>NIT *</label>
+              <input type="number" class="form-control" required placeholder="NIT sin digito de verificación" name="nit"
+                [(ngModel)]="empresa.nit_empresa" #nitFieldEmpresa="ngModel">
+              <div *ngIf="nitFieldEmpresa?.invalid && (nitFieldEmpresa?.dirty || nitFieldEmpresa?.touched)">
+                <div *ngIf="nitFieldEmpresa?.errors?.['required']">Los nombres son requeridos</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': emailFaildEmpresa?.invalid && (emailFaildEmpresa?.dirty || emailFaildEmpresa?.touched)}">
+              <label>Correo electrónico *</label>
+              <input type="email" class="form-control" required placeholder="name@address.com" name="email"
+                [(ngModel)]="empresa.email" #emailFaildEmpresa="ngModel"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}">
+              <div *ngIf="emailFaildEmpresa?.invalid && (emailFaildEmpresa?.dirty || emailFaildEmpresa?.touched)">
+                <div *ngIf="emailFaildEmpresa?.errors?.['required']">El correo electrónico es requerido</div>
+                <div *ngIf="emailFaildEmpresa?.errors?.['email']">El correo electrónico debe tener un formato válido</div>
+              </div>
+            </div>
+
+            <div class="form-group"
+              [ngClass]="{'invalid-field': passwordFieldEmpresa?.invalid && (passwordFieldEmpresa?.dirty || passwordFieldEmpresa?.touched)}">
+              <label>Contraseña *</label>
+              <div class="input-group input-group-merge">
+                <input type="password" class="form-control" required placeholder="Ingresa tu contraseña" name="password"
+                  id="passwordregistroempresa" [(ngModel)]="empresa.password" #passwordFieldEmpresa="ngModel"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                <div class="input-group-append">
+                  <span class="input-group-text" (click)="view_passwordd('passwordregistroempresa');"
+                    style="cursor: pointer;">
+                    <i class="fe fe-eye"></i>
+                  </span>
+                </div>
+
+                <div
+                  *ngIf="passwordFieldEmpresa?.invalid && (passwordFieldEmpresa?.dirty || passwordFieldEmpresa?.touched)">
+                  <div *ngIf="passwordFieldEmpresa?.errors?.['required']">La contraseña es requerida</div>
+                  <div *ngIf="passwordFieldEmpresa?.errors?.['pattern']">
+                    La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al
+                    menos 8 caracteres
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <button [disabled]="form_registro_empresario.invalid" class="btn btn-lg btn-block btn-primary mb-3"
+              type="submit">
+              Registrarse
+            </button>
+
+          </form>
+        </div> -->
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

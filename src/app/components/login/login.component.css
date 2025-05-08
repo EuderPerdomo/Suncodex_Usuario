@@ -1,0 +1,22 @@
+/*Para realizar los cambios enntre opciones*/
+.ps-tab {
+  display: none;
+}
+
+.ps-tab.active {
+  display: block;
+}
+
+
+/*campos invalidos en el formulario*/
+.invalid-field input {
+  border-color: #f44336; 
+}
+
+/*regreso al inicio*/
+.nav-link:hover {
+  transform: translateX(-3px);
+  transition: all 0.3s ease;
+  text-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+}
+/*regreso al Inicio finaliza*/

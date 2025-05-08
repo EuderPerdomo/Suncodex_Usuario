@@ -1,0 +1,593 @@
+<app-nav></app-nav>
+
+<div class="main-content">
+    <div class="container-fluid" id="informepdf">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10 col-xl-10">
+
+                <!-- Header -->
+                <div class="header mt-md-5">
+                    <div class="header-body">
+                        <div class="row align-items-center">
+                            <div class="col">
+
+                                <!-- Pretitle -->
+                                <h6 class="header-pretitle">
+                                    Resumen
+                                </h6>
+
+                                <!-- Title -->
+                                <h1 class="header-title" *ngIf="load_data">
+                                    {{calculo?.nombre}}
+                                </h1>
+
+                            </div>
+                        </div> <!-- / .row -->
+                    </div>
+                </div>
+                <div class="row" *ngIf="load_data">
+
+                    <div class="col-12 col-md-12">
+
+                        <div class="row">
+                            <div class="col-lg-6"><canvas id="Grafico_1"></canvas></div>
+                            <div class="col-lg-6"><canvas id="Grafico_2"></canvas></div>
+                        </div>
+                        <div class="row mt-md-5">
+                            <div class="col-12 col-lg-6 col-xl">
+
+                                <!-- Card -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center gx-0">
+                                            <div class="col">
+
+                                                <!-- Title -->
+                                                <h6 class="text-uppercase text-body-secondary mb-2">
+                                                    Ahorro Estimado
+                                                </h6>
+
+                                                <!-- Heading -->
+                                                <span class="h2 mb-0">
+                                                    $24,500
+                                                </span>
+
+                                                <!-- Badge -->
+                                                <span class="badge text-bg-success-subtle mt-n1">
+                                                    +3.5%
+                                                </span>
+
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <!-- Icon -->
+                                                <span class="h2 fe fe-dollar-sign text-body-secondary mb-0"></span>
+
+                                            </div>
+                                        </div> <!-- / .row -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl">
+
+                                <!-- Card  text-white bg-success-->
+                                <div class="card  mb-3">
+                                    <div class="card-body">
+                                        <div class="row align-items-center gx-0">
+                                            <div class="col">
+
+                                                <!-- Title -->
+                                                <h6 class="text-uppercase text-body-secondary mb-2">
+                                                    Potencia Instalada
+                                                </h6>
+
+                                                <!-- Heading -->
+                                                <span class="h2 mb-0">
+                                                    {{calculo.resultadoCalculoPanel[0]?.potencia_arreglo_fv}} W
+                                                </span>
+
+                                                <!-- Badge -->
+                                                <span class="badge text-bg-success-subtle mt-n1">
+                                                    +3.5%
+                                                </span>
+
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <!-- Icon -->
+                                                <span class="h2 fe fe-zap text-body-secondary mb-0"></span>
+
+                                            </div>
+                                        </div> <!-- / .row -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl">
+
+                                <!-- Card -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center gx-0">
+                                            <div class="col">
+
+                                                <!-- Title -->
+                                                <h6 class="text-uppercase text-body-secondary mb-2">
+                                                    Consumo Medio Dia
+                                                </h6>
+
+                                                <!-- Heading -->
+                                                <span class="h2 mb-0">
+                                                    {{calculo.total_dia}} W
+                                                </span>
+
+                                                <!-- Badge -->
+                                                <span class="badge text-bg-success-subtle mt-n1">
+                                                    +3.5%
+                                                </span>
+
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <!-- Icon -->
+                                                <span class="h2 fe fe-dollar-sign text-body-secondary mb-0"></span>
+
+                                            </div>
+                                        </div> <!-- / .row -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-6 col-xl">
+
+                                <!-- Card -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row align-items-center gx-0">
+                                            <div class="col">
+
+                                                <!-- Title -->
+                                                <h6 class="text-uppercase text-body-secondary mb-2">
+                                                    Budget
+                                                </h6>
+
+                                                <!-- Heading -->
+                                                <span class="h2 mb-0">
+                                                    $24,500
+                                                </span>
+
+                                                <!-- Badge -->
+                                                <span class="badge text-bg-success-subtle mt-n1">
+                                                    +3.5%
+                                                </span>
+
+                                            </div>
+                                            <div class="col-auto">
+
+                                                <!-- Icon -->
+                                                <span class="h2 fe fe-dollar-sign text-body-secondary mb-0"></span>
+
+                                            </div>
+                                        </div> <!-- / .row -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-md-6">
+
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            Panel
+                                        </h6>
+
+                                        <!-- Heading -->
+                                        <span class="h4 mb-0">
+                                            {{calculo.panel.modelo}}
+                                        </span>
+
+                                        <div class="col-lg-6">
+                                            <img [src]="calculo.panel.portada" class="img-thumbnail"
+                                                alt="Rounded image">
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="menu-title">Caracteristicas</p>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-w"></i> Potencia: {{calculo.panel.potencia}} W
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-grip-lines"></i> VMPP: {{calculo.panel.vmpp}} V
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> IMPP: {{calculo.panel.impp}} A
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-grip-lines"></i> VOC: {{calculo.panel.voc}} V
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> ISC: {{calculo.panel.isc}} A
+                                        </div>
+                                        <br>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Cantidad:
+                                            {{calculo.resultadoCalculoPanel[0].cantidad_paneles}} Unds
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Serie:
+                                            {{calculo.resultadoCalculoPanel[0].paneles_serie}} Unds
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Paralelos:
+                                            {{calculo.resultadoCalculoPanel[0].paneles_paralelo}} Unds
+                                        </div>
+
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Potencia Array:
+                                            {{calculo.resultadoCalculoPanel[0].potencia_arreglo_fv}} W
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Voltaje Array:
+                                            {{calculo.resultadoCalculoPanel[0].voltaje_array_fv}} V
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Corriente Array:
+                                            {{calculo.resultadoCalculoPanel[0].amperaje_array_fv}} A
+                                        </div>
+
+
+                                    </div>
+                                </div> <!-- / .row -->
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            Controlador
+                                        </h6>
+
+                                        <!-- Heading -->
+                                        <span class="h4 mb-0">
+                                            {{calculo.controlador.modelo}}
+                                        </span>
+
+                                        <div class="col-lg-6">
+                                            <img [src]="calculo.controlador.portada" class="img-thumbnail"
+                                                alt="Rounded image">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="menu-title">Caracteristicas</p>
+
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-w"></i> Amperaje: {{calculo.controlador.amperaje}} A
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-grip-lines"></i> Tecnología:
+                                            {{calculo.controlador.tecnologia}}
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> Peso: {{calculo.controlador.peso}} Kg
+                                        </div>
+                                        <br>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Paralelos:
+                                            {{calculo.resultadoCalculoControlador[0].controlador_cantidad_paralelo}}
+                                            Unds
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Max_PV_Power:
+                                            {{calculo.resultadoCalculoControlador[0].controlador_max_input_power}} W
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Max_PV_Voltaje:
+                                            {{calculo.resultadoCalculoControlador[0].controlador_max_pv_input_voltaje}}
+                                            V
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Tensión Sistema:
+                                            {{calculo.resultadoCalculoControlador[0].controlador_tension}} V
+                                        </div>
+
+                                    </div>
+                                </div> <!-- / .row -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            Inversor
+                                        </h6>
+
+                                        <!-- Heading -->
+                                        <span class="h4 mb-0">
+                                            {{calculo.inversor.modelo}}
+                                        </span>
+
+                                        <div class="col-lg-6">
+                                            <img [src]="calculo.inversor.portada" class="img-thumbnail"
+                                                alt="Rounded image">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="menu-title">Caracteristicas</p>
+
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-w"></i> Potencia: {{calculo.inversor.potencia}} W
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-grip-lines"></i> Tecnología:
+                                            {{calculo.inversor.tecnologia}}
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> Peso: {{calculo.inversor.peso}} Kg
+                                        </div>
+                                        <br>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Voltaje_in:
+                                            {{calculo.resultadoCalculoInversor[0].voltaje_in_inversor}} V/DC
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Voltaje_out:
+                                            {{calculo.resultadoCalculoInversor[0].voltaje_out_inversor}} V/AC
+                                        </div>
+                                    </div>
+                                </div> <!-- / .row -->
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            Baterias
+                                        </h6>
+
+                                        <!-- Heading -->
+                                        <span class="h4 mb-0">
+                                            {{calculo.bateria.modelo}}
+                                        </span>
+
+                                        <div class="col-lg-6">
+                                            <img [src]="calculo.bateria.portada" class="img-thumbnail"
+                                                alt="Rounded image">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-auto">
+                                        <p class="menu-title">Caracteristicas</p>
+
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-w"></i> Ah: {{calculo.bateria.amperaje}} Ah
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-grip-lines"></i> Voltaje: {{calculo.bateria.voltaje}} V
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> Tecnología: {{calculo.bateria.tecnologia}}
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fas fa-bolt"></i> Peso: {{calculo.bateria.peso}} Kg
+                                        </div>
+                                        <br>
+
+
+
+
+
+
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Cantidad:
+                                            {{calculo.resultadoCalculoBateria[0].total_baterias}} Unds
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Series:
+                                            {{calculo.resultadoCalculoBateria[0].baterias_serie}} V/AC
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Paralelos:
+                                            {{calculo.resultadoCalculoBateria[0].baterias_paralelo}} unds
+                                        </div>
+                                        <div class="menu-item">
+                                            <i class="fa-solid fa-asterisk"></i> Profundida Descarga:
+                                            {{calculo.resultadoCalculoBateria[0].cuttoff}} %
+                                        </div>
+
+
+                                    </div>
+                                </div> <!-- / .row -->
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-12">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            {{calculo.tipo | uppercase}} 
+                                        </h6>                   
+                                    </div>                                  
+                                </div> <!-- / .row -->
+                                
+                                <!-- Disclaimer Section -->
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <ng-container *ngIf="calculo.tipo=='facturas'">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-nowrap table-sm" name="tabla">
+                                                  <thead>
+                                                    <tr>
+                                                      <th>Mes</th>
+                                                      <th>Consumo KWh/mes</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody class="font-size-base">
+                                                    <tr *ngFor="let item of calculo.potencias; index as i">
+                                                      <td>
+                                                        {{item.nombre}}
+                                                      </td>
+                                                      <td>
+                                                        {{item.potencia}}
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                              </div>
+
+                                            
+                                        </ng-container>
+                                        <ng-container *ngIf="calculo.tipo=='potencias'">
+
+                                       
+                                                  <div class="table-responsive">
+                                                    <table class="table table-hover table-nowrap table-sm" name="tabla">
+                                                      <thead>
+                                                        <tr>
+                                                          <th>Equipo</th>
+                                                          <th>Potencia</th>
+                                                          <th>Cantidad</th>
+                                                          <th>Consumo por horas</th>
+                                                          <th>Horas Uso Diario</th>
+                                                          <th>Consumo total Diario</th>
+ 
+                                                        </tr>
+                                                      </thead>
+                                                      <tbody class="font-size-base">
+                                                        <tr *ngFor="let item of calculo.potencias; index as i">
+                                                          <td>
+                                                            {{item.nombre}}
+                                                          </td>
+                                                          <td>
+                                                            {{item.potencia}}
+                                                          <td>
+                                                            {{item.cantidad}}
+                                                          </td>
+                                                          <td>
+                                                            {{item.w_totales}}
+                                                          </td>
+                                                          <td>
+                                                            {{item.horas_dia}}
+                                                          </td>
+                                                          <td>
+                                                            {{item.consumo_diario}}
+                                                          </td>
+                                                        </tr>
+                                                      </tbody>
+                                                    </table>
+                                                  </div>
+                                           
+
+
+                                        </ng-container>
+                                      
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-12 col-md-12">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col">
+                                        <!-- Title -->
+                                        <h6 class="text-uppercase text-muted mb-2">
+                                            Fecha Creación <i class="fe fe-info" data-toggle="tooltip"
+                                                data-title="Your limits renew on May 1, 2020" data-original-title=""
+                                                title=""></i>
+                                        </h6>
+                    
+                                        <!-- Heading -->
+                                        <span class="h2 mb-0">
+                                            {{calculo.createdAt}}
+                                        </span>
+                                    </div>
+                                    <div class="col-auto">
+                                        <img src="./assets/img/logo_silicio.png" class="navbar-brand-img mx-auto" style="max-height: 4rem !important;" alt="...">
+                                    </div>
+                                </div> <!-- / .row -->
+                                
+                                <!-- Disclaimer Section -->
+                                <div class="row mt-4">
+                                    <div class="col">
+                                        <div class="alert alert-warning" role="alert">
+                                            <strong>Nota de Exención de Responsabilidad</strong>
+                                            <ul class="mt-2 mb-0">
+                                                <li>Todos los cálculos generados por esta herramienta deben ser evaluados y verificados por un profesional cualificado en energía solar antes de llevar a cabo cualquier instalación.</li>
+                                                <li>Los resultados proporcionados por esta calculadora son solo para fines informativos y educativos. No deben considerarse como asesoramiento profesional o recomendaciones definitivas.</li>
+                                                <li>Aunque se ha puesto un gran esfuerzo en garantizar la exactitud de los cálculos, no se puede garantizar que todos los datos ingresados y las suposiciones utilizadas sean completamente precisos o estén actualizados. Las condiciones locales, las especificaciones del equipo y otros factores pueden afectar significativamente los resultados.</li>
+                                                <li>La instalación de sistemas fotovoltaicos implica riesgos eléctricos y estructurales que deben ser manejados por personal capacitado. El incumplimiento de las normas y regulaciones locales puede resultar en daños materiales, lesiones personales o incluso la muerte.</li>
+                                                <li>Las condiciones climáticas y geográficas locales pueden influir en el rendimiento de los sistemas fotovoltaicos. Se recomienda realizar un estudio detallado del sitio antes de la instalación.</li>
+                                                <li>Los usuarios deben asegurarse de que la instalación cumpla con todas las regulaciones y normativas locales, nacionales e internacionales aplicables. Esto incluye, pero no se limita a, códigos eléctricos, permisos de construcción y regulaciones de seguridad.</li>
+                                                <li>Esta plataforma no asume ninguna responsabilidad por cualquier daño o pérdida que pueda surgir directa o indirectamente del uso de los cálculos proporcionados. Los usuarios asumen toda la responsabilidad por cualquier decisión basada en los resultados obtenidos de esta herramienta.</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- / .row -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <br>
+
+            </div>
+        </div> <!-- / .row -->
+    </div>
+    <button type="submit" class="btn btn-success" (click)="guardarInforme()">
+        Generar PDF</button>
+</div>
+
+<app-footer></app-footer>

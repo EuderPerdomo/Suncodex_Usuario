@@ -1,0 +1,51 @@
+<div class="d-flex align-items-center justify-content-between mb-4 pb-1 pb-sm-3">
+  <h1 class="h2 mb-0">Mis Calculos</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-sm table-nowrap card-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Tipo</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody class="font-size-base">
+      <tr *ngFor="let item of calculos | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+        <td>
+          {{item.nombre}}
+        </td>
+        <td>
+          {{item.createdAt | date }}
+        </td>
+        <td>
+          {{item.tipo}}
+        </td>
+        <td>
+
+
+          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Opciones
+          </button>
+          <div class="btn-group">
+            <div class="dropdown-menu">
+              <a class="dropdown-item" [routerLink]="['/usuario/editCalculo',item._id]">Editar</a>
+              <a class="dropdown-item" [routerLink]="['/summary',item._id]">Summary</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger">Eliminar</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<ngb-pagination *ngIf="calculos.length >= 1"
+  [(page)]="page"
+  [pageSize]="pageSize"
+  [maxSize]="10"
+  [rotate]="true" [boundaryLinks]="true"
+[collectionSize]="calculos.length"></ngb-pagination>

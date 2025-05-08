@@ -1,0 +1,287 @@
+
+<app-mapa (CambioUbicacion)="cambioUbicacion($event)"></app-mapa>
+<h4>Latitud: {{latitud}}</h4>
+<h4>Longitud: {{longitud}}</h4>
+
+<div class="slidecontainer">
+    <label for="socInicial" class="me-2">SOC Inicial: {{bateria.soc_inicial}} %</label>
+    <input type="range" min="1" max="100" value="100" class="slider" id="myRange" [(ngModel)]="bateria.soc_inicial" (change)="simularSistema(1)">
+  </div>
+
+  <div class="slidecontainer">
+    <label for="amperios_descarga" class="me-2">Corriente de Descarga: {{amperios_descarga}} A</label>
+    <input type="range" min="0" max="10" value="10" class="slider" id="amperiosDescarga" [(ngModel)]="amperios_descarga" (change)="simularSistema(1)">
+  </div>
+<!-- 
+<form action="">
+    <div class="form-group d-flex align-items-center">
+        <label for="socInicial" class="me-2">SOC Inicial:</label>
+        <input type="number" class="form-control w-auto"  required name="socInicial"
+            [(ngModel)]="bateria.soc_inicial" [min]="1" [max]="100" (change)="simularSistema(1)">
+    </div>
+
+    <div class="form-group d-flex align-items-center">
+        <label for="amperios_descarga" class="me-2">Corriente de Descarga:</label>
+        <input type="number" class="form-control w-auto"  required name="amperios_descarga"
+            [(ngModel)]="amperios_descarga" [min]="0" [max]="100" (change)="simularSistema(1)">
+    </div>
+
+</form> -->
+
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault"
+        id="flexRadioDefault1" (change)="changeRadio()" [value]="true"
+        [(ngModel)]="filtro">
+    <label class="form-check-label" for="flexRadioDefault1">Paneles solares
+        predefinidos</label>
+</div>
+
+<div class="form-check">
+    <input class="form-check-input" type="radio" name="flexRadioDefault"
+        id="flexRadioDefault2" [value]="false" (change)="changeRadio()"
+        [(ngModel)]="filtro">
+    <label class="form-check-label" for="flexRadioDefault2">Crear Mi propio
+        Panel Solar</label>
+</div>
+
+    <!-- Selector de paneles (visible si filtro es true) -->
+    <div class="form-group d-flex align-items-center" *ngIf="filtro">
+        <label for="select-tension" class="me-2">Paneles Disponibles:</label>
+        <select class="form-control custom-select w-auto" id="select-tension"
+            required name="panel" [(ngModel)]="panel"
+            (change)="buscar_imagen_panel(panel)">
+            <option value="0" selected disabled>Seleccionar</option>
+            <option value="{{item._id}}" *ngFor="let item of paneles_bd">
+                {{item.modelo}} // {{item.nombreOficina}}
+            </option>
+        </select>
+    </div>
+
+<!-- Formulario para crear panel solar -->
+<div class="row" *ngIf="!filtro">
+    <div class="col-md-12">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="card-title mb-0">
+                    <i class="fa-solid fa-solar-panel me-2"></i>
+                    Crear Panel Solar
+                </h4>
+            </div>
+            <div class="card-body">
+                <form #panelForm="ngForm" appUnambiguousRole (ngSubmit)="manejarAccion(panelForm)">
+                    <div class="row">
+                        <!-- Columna 1 -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="potencia" class="form-label">Potencia
+                                    (W)</label>
+                                <input type="number" id="potencia" name="potencia" class="form-control" required
+                                    [(ngModel)]="panel_propio.potencia" #potencia="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="potencia.invalid && (potencia.dirty || potencia.touched)"
+                                    class="text-danger">
+                                    La potencia en Watts es requerida.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="voc" class="form-label">VOC (V)</label>
+                                <input type="number" id="voc" name="voc" class="form-control" required
+                                    [(ngModel)]="panel_propio.voc" #voc="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="voc.invalid && (voc.dirty || voc.touched)" class="text-danger">
+                                    El VOC es requerido.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="isc" class="form-label">ISC (I)</label>
+                                <input type="number" id="isc" name="isc" class="form-control" required
+                                    [(ngModel)]="panel_propio.isc" #isc="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="isc.invalid && (isc.dirty || isc.touched)" class="text-danger">
+                                    El ISC es requerido.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tc_of_voc" class="form-label">Coeficiente
+                                    VOC/Temperatura (%)</label>
+                                <input type="number" id="tc_of_voc" name="tc_of_voc" class="form-control" required
+                                    [(ngModel)]="panel_propio.tc_of_voc" #tc_of_voc="ngModel"
+                                    [disabled]="formBloqueado">
+                                <div *ngIf="tc_of_voc.invalid && (tc_of_voc.dirty || tc_of_voc.touched)"
+                                    class="text-danger">
+                                    El coeficiente VOC/temperatura es requerido.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Columna 2 -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="eficiencia" class="form-label">Eficiencia
+                                    (%)</label>
+                                <input type="number" id="eficiencia" name="eficiencia" class="form-control" required
+                                    [(ngModel)]="panel_propio.eficiencia" #eficiencia="ngModel"
+                                    [disabled]="formBloqueado">
+                                <div *ngIf="eficiencia.invalid && (eficiencia.dirty || eficiencia.touched)"
+                                    class="text-danger">
+                                    La eficiencia es requerida.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tensionNominal" class="form-label">Tensión
+                                    Nominal (V)</label>
+                                <input type="number" id="tensionNominal" name="tensionNominal" class="form-control"
+                                    required [(ngModel)]="panel_propio.tension" #tensionNominal="ngModel"
+                                    [disabled]="formBloqueado">
+                                <div *ngIf="tensionNominal.invalid && (tensionNominal.dirty || tensionNominal.touched)"
+                                    class="text-danger">
+                                    La tensión nominal es requerida.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="vmpp" class="form-label">VMPP (V)</label>
+                                <input type="number" id="vmpp" name="vmpp" class="form-control" required
+                                    [(ngModel)]="panel_propio.vmpp" #vmpp="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="vmpp.invalid && (vmpp.dirty || vmpp.touched)" class="text-danger">
+                                    El VMPP es requerido.
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="tc_of_pmax" class="form-label">Coeficiente
+                                    Potencia/Temperatura (%)</label>
+                                <input type="number" id="tc_of_pmax" name="tc_of_pmax" class="form-control" required
+                                    [(ngModel)]="panel_propio.tc_of_pmax" #tc_of_pmax="ngModel"
+                                    [disabled]="formBloqueado">
+                                <div *ngIf="tc_of_pmax.invalid && (tc_of_pmax.dirty || tc_of_pmax.touched)"
+                                    class="text-danger">
+                                    El coeficiente Potencia/temperatura es requerido.
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Columna 3 -->
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="impp" class="form-label">IMPP (I)</label>
+                                <input type="number" id="impp" name="impp" class="form-control" required
+                                    [(ngModel)]="panel_propio.impp" #impp="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="impp.invalid && (impp.dirty || impp.touched)" class="text-danger">
+                                    El IMPP es requerido.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="noct" class="form-label">NOCT (%)</label>
+                                <input type="number" id="noct" name="noct" class="form-control" required
+                                    [(ngModel)]="panel_propio.noct" #noct="ngModel" [disabled]="formBloqueado">
+                                <div *ngIf="noct.invalid && (noct.dirty || noct.touched)" class="text-danger">
+                                    El NOCT es requerido.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="tc_of_isc" class="form-label">Coeficiente
+                                    ISC/Temperatura (%)</label>
+                                <input type="number" id="tc_of_isc" name="tc_of_isc" class="form-control" required
+                                    [(ngModel)]="panel_propio.tc_of_isc" #tc_of_isc="ngModel"
+                                    [disabled]="formBloqueado">
+                                <div *ngIf="tc_of_isc.invalid && (tc_of_isc.dirty || tc_of_isc.touched)"
+                                    class="text-danger">
+                                    El coeficiente ISC/temperatura es requerido.
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary btn-lg" type="submit">
+                            {{ obtenerTextoBoton() }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card-body">
+    <!--Inicia nuevo diseño  -->
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Lateral izquierdo -->
+            <div class="col-md-3">
+                <div class="btn-group-vertical w-100" role="group" aria-label="Months">
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(1)">Enero</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(2)">Febrero</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(3)">Marzo</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(4)">Abril</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(5)">Mayo</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(6)">Junio</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(7)">Julio</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(8)">Agosto</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(9)">Septiembre</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(10)">Octubre</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(11)">Noviembre</button>
+                    <button type="button" class="btn btn-secondary" (click)="simularSistema(12)">Diciembre</button>
+                    <!-- Agregar botones para los otros meses -->
+                </div>
+            </div>
+
+            <!-- Lateral derecho -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-12 " style="height: 500px;"> 
+                        <canvas id="ChartComparativo" style=" width: 100%;
+                          height: 400px;"></canvas>
+                    </div>
+                    <div class="col-6">
+                        <h4>PWM</h4>
+                        <app-battery-display [soc]="pwmSoc" [isCharging]="isSunlight"></app-battery-display>
+                    </div>
+                    <div class="col-6">
+                        <H4>MPPT</H4>
+                        <app-battery-display [soc]="mpptSoc" [isCharging]="isSunlight"></app-battery-display>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Finaliza Nuevo diseño  -->
+
+</div>
+
+<h4>¿Como funciona este modulo?</h4>
+<p>
+    Este modulo muestra la comparación entre el emplear un controaldor de tipo MPPT o un controlador de tipo PWM, partiendo de un estado de carga (SOC) y observando la curva de comportamiento para un día<br>
+    <span>Variables</span><br>
+</p>
+<ul>
+    <li>
+        Mapa: El mapa permite elegir una ubicación especifica pudiendo observar la diferencia de acuerdo a la radiación disponible.
+    </li>
+    <li>
+        SOC inicial: Este parametro permite modificar el % de carga del cual aprte la bateria, por defecto inicia en un 30%
+    </li>
+    <li>
+        Corriente de descarga: La corriente de descarga permite establecer un valor como descarga continua (representa un consumo de la bateria), por defecto el valor inicial es 0
+    </li>
+    <li>
+        Formulario Panel solar: Este formulario permite crear y editar los atributos para un panel solar personalizado
+    </li>
+    <li>Selección de mes: Permite observar el comportamiento de carga para cada uno de los meses, para ello se toma la media de radiacion en cada mes y se calculan los valores de carga.
+
+    </li>
+
+    <li>Grafico: Muestra la curva calculada de los estados de carga a lo largo de dia.
+
+    </li>
+    <li>Porcentaje Final: Muestra el esatdo de carga final de las baterias para el controlador PWM / MPPT.
+
+    </li>
+
+</ul>

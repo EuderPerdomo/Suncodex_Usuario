@@ -1,0 +1,192 @@
+
+<app-nav></app-nav>
+
+
+
+   <!-- Breadcrumb -->
+   <nav class="bg-secondary mb-3" aria-label="breadcrumb" style="margin-top: 160px;">
+    <div class="container">
+      <ol class="breadcrumb breadcrumb-alt mb-0">
+        <li class="breadcrumb-item">
+          <a href="index.html"><i class="ci-home"></i></a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">SunCodex Blog</li>
+      </ol>
+    </div>
+  </nav>
+
+
+  <!-- Page content -->
+  <section class="container pt-3 pt-md-4 pb-3 pb-sm-4 pb-lg-5 mb-4">
+    <div class="row pb-2 pb-md-3">
+
+      <!-- List of posts -->
+      <div class="col-lg-8">
+        <h1 class="mb-4 pb-1 pb-md-3">SunCodeX Blog</h1>
+
+        <!-- Post -->
+         <article class="image-scale card border-0 mb-5 pb-md-2" *ngFor="let item of posts | slice: (page-1)*pageSize : (page-1) * pageSize + pageSize">
+          <a [routerLink]="['/blog/'+item.slug]" class="image-inner card-header mb-3 p-0 border-0 rounded position-relative">
+            <!-- <img [src]="item.portada" alt="Imagen no encontrada"  style="max-width: 1216px; max-height: 540px;"> -->
+            <img [src]="getCloudinaryImageUrl(item.portada, 400, 90, 'fill')" alt="Product image">
+          </a>
+          <div class="card-body p-0">
+            <ul class="nav nav-muted mb-2 pb-1">
+              <li class="nav-item me-2">
+                <a  class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                 {{item.categoria.titulo}}
+                </a>
+                <span class="text-border px-1">|</span>
+              </li>
+              <li class="nav-item me-2">
+                <a href="#" class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                  {{item.createdAt | date:'longDate' }}
+                </a>
+                <span class="text-border px-1">|</span>
+              </li>
+              <li class="nav-item me-2">
+                <a href="#" class="nav-link d-inline-block me-2 p-0 fs-sm fw-normal">
+                  <i class="ci-chat mt-n1 me-2 fs-base align-middle"></i>
+                  {{item.comentarios.length}} Comentarios
+                </a>
+              </li>
+            </ul>
+            <h3 class="h5 mb-2 nav-dark">
+              <a [routerLink]="['/blog/'+item.slug]" class="nav-link">{{item.titulo}}</a>
+            </h3>
+            <div class="col-lg-12 col-md-12 mb-md-0 mb-4" [innerHTML]="item.descripcion">
+            </div>
+
+          </div>
+        </article> 
+
+
+        <!-- Pagination -->
+
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="posts.length"></ngb-pagination>
+
+      </div>
+
+
+      <!-- Sidebar -->
+      <aside class="col-lg-4 ps-lg-5">
+        <div id="blog-sidebar" class="offcanvas-lg offcanvas-end">
+          <div class="offcanvas-header align-items-center border-bottom mb-3">
+            <h2 class="h5 mb-0">Sidebar</h2>
+            <button class="btn-close me-n1" type="button" data-bs-dismiss="offcanvas" data-bs-target="#blog-sidebar" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body pt-3 pb-1 pt-lg-0">
+
+            <!-- Search -->
+            <div class="widget border-bottom pb-2 mb-4">
+              <div class="input-group mb-4">
+                <input type="text" class="form-control pe-5 rounded" placeholder="Search the blog">
+                <i class="ci-search position-absolute end-0 top-50 translate-middle-y me-3 fs-lg zindex-5"></i>
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="widget widget-categories border-bottom pt-1 pb-4 mb-4">
+              <h3 class="h4">Categorias</h3>
+              <ul class="nav nav-dark">
+                <li>
+                  <a class="nav-link" [routerLink]="['/blog/post_list']">
+                    <span>Todos</span>
+                    <!-- <span class="ps-2 fw-normal text-muted">{{posts.length}}</span> -->
+                  </a>
+                </li>
+                <li>
+                    
+                  <a class="nav-link"  *ngFor="let item of categorias" [routerLink]="['/blog/categoria/',item.titulo]">
+                    <span>{{item.titulo}}</span>
+                    <!-- <span class="ps-2 fw-normal text-muted">2</span> -->
+                  </a>
+                </li>
+
+              </ul>
+            </div>
+
+            <!-- Featured posts -->
+            <div class="widget widget-categories border-bottom pt-1 pb-3 mb-4">
+              <h3 class="h4">Post Destacados</h3>
+              <ul class="list-unstyled">
+                <!-- Item -->
+                <li class="image-scale d-flex align-items-start mb-4" *ngFor="let item of posts_destacados">
+                  <a [routerLink]="['/blog/'+item.slug]" class="flex-shrink-0 image-inner rounded me-3" style="width: 100px;">
+                    <img [src]="getCloudinaryImageUrl(item.portada, 50, 50, 'fill')" class="ms-1" width="100" alt="Image">
+                  </a>
+                  <div class="ps-1">
+                    <span class="d-block mb-1 fs-sm text-muted">
+                      <i class="ci-clock fs-base align-middle mt-n1 me-2"></i>
+                      {{item.createdAt | date:'longDate' }}
+                    </span>
+                    <h4 class="h6 mb-1 nav-dark">
+                      <a [routerLink]="['/blog/'+item.slug]" class="nav-link">{{item.titulo}}</a>
+                    </h4>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tags -->
+            <div class="widget pt-1 pb-2 mb-4">
+              <h3 class="h4">Tags</h3>
+              <a *ngFor="let item of tags" class="btn-tag me-2 mb-2">#{{item.slug}}</a>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+
+  <!-- Subscription CTA -->
+  <!-- <section class="bg-secondary py-5">
+    <div class="container pt-2 pt-md-3 pb-3">
+      <div class="row align-items-center">
+        <form class="col-md-6 col-xl-5 needs-validation" novalidate>
+          <h2 class="h1 mb-3">Subscribe for updates</h2>
+          <p class="text-muted fs-lg pb-3 mb-4">Subscribe for exclusive early sale access and new arrivals.</p>
+          <div class="mb-2">
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-women" checked>
+              <label for="s-women" class="btn-control-label">Women</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-men">
+              <label for="s-men" class="btn-control-label">Men</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-girls">
+              <label for="s-girls" class="btn-control-label">Girls</label>
+            </div>
+            <div class="btn-control form-check-inline">
+              <input type="checkbox" class="btn-control-input" id="s-boys">
+              <label for="s-boys" class="btn-control-label">Boys</label>
+            </div>
+          </div>
+          <div class="mb-4 pt-4">
+            <label for="s-email" class="form-label-lg">Email</label>
+            <div class="input-group input-group-lg">
+              <input type="email" id="s-email" class="form-control" placeholder="Your email address" required>
+              <button type="submit" class="btn btn-primary px-4">Subscribe</button>
+            </div>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" id="s-agree" class="form-check-input">
+            <label for="s-agree" class="form-check-label fs-base">I agree to receive communications from Createx Store.</label>
+          </div>
+        </form>
+        <div class="col-md-6 col-xl-7 d-none d-md-block">
+          <div class="ms-auto" style="max-width: 459px;">
+            <img src="../assets/img/ecommerce/subscribe-illustration.png" class="d-block" alt="Illustration">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+
+
+<app-footer></app-footer>

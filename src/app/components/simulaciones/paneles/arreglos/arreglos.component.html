@@ -1,0 +1,46 @@
+
+  <button *ngIf="groups.length ==0" (click)="addGroup()" class="mt-3">Crear Array</button>
+
+<!-- Inicia adaptacion -->
+<div *ngFor="let group of groups; let i = index" class="container group">
+  <!-- <h3>Array {{ i + 1 }}</h3> -->
+  <div class="general">
+    <div class="row" *ngFor="let row of group.panels; let rowIndex = index">
+      <div *ngFor="let panel of row; let panelIndex = index" class="panel">
+        <img src="assets/solarpanel.jpg" alt="Panel Solar" class="panel-icon" />
+        <button *ngIf="isSingleColumn(group.panels) || group.panels.length==1"
+          (click)="removePanel(i, rowIndex, panelIndex)">
+          Eliminar
+        </button>
+      </div>
+      <button (click)="removerFila(i, rowIndex)" type="button" class="btn btn-danger btn-sm remove-row-btn">
+        Eliminar String
+      </button>
+    </div>
+    <!-- Línea de conexión en paralelo en el lado izquierdo -->
+    <div class="parallel-line"></div>
+    <!-- Línea de conexión en paralelo en el lado derecho -->
+    <div class="parallel-line" style="right: -30px; left: auto;"></div>
+  </div>
+
+  <button (click)="addPanelInSeries(i)">+ Serie</button>
+  <button (click)="addPanelInParallel(i)">+ Paralelo</button>
+  <button (click)="removeGroup(i)">Eliminar Grupo</button>
+
+  <div class="col-3 form-group">
+    <p class="menu-title">Salida Arreglo</p>
+    <div class="menu-item">
+      <i class="fas fa-grip-lines"></i> VOC Total: {{ group['totalVoltage'] || 0  | number: '1.2-2' }}V
+    </div>
+    <div class="menu-item">
+      <i class="fas fa-bolt"></i> ISC Total: {{ group['totalCurrent'] || 0  | number: '1.2-2' }}A
+    </div>
+    <div class="menu-item">
+      <i class="fas fa-grip-lines"></i> VMPP Total: {{ group['totalVmpp'] || 0  | number: '1.2-2' }}V
+    </div>
+    <div class="menu-item">
+      <i class="fa-solid fa-w"></i> Potencia: {{ group['totalPower'] || 0 }}W
+    </div>
+  </div>
+
+</div>

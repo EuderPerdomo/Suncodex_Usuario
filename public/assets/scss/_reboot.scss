@@ -1,0 +1,83 @@
+//
+// Reboot
+// --------------------------------------------------
+
+
+html * {
+  @include font-smoothing;
+}
+
+// Sticky footer
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.page-wrapper {
+  flex: 1 0 auto;
+}
+.footer {
+  flex-shrink: 0;
+}
+
+// Root
+:root {
+  --#{$prefix}gradient-from-color: #{$primary};
+  --#{$prefix}gradient-to-color: #30bcf9;
+}
+
+// Links
+a {
+  transition: $link-transition;
+  &:focus { outline: none; }
+}
+
+// Images
+// Responsive images (ensure images don't scale beyond their parents)
+img,
+figure {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+svg { max-width: 100%; }
+
+// Responsive iframes
+iframe {
+  width: 100%;
+  border: 0;
+}
+
+// Text Selection Color
+::selection {
+  background: $user-selection-color;
+}
+::-moz-selection {
+  background: $user-selection-color;
+}
+
+b,
+strong {
+  font-weight: $font-weight-bold;
+}
+
+small { font-weight: inherit; }
+
+cite { font-style: normal; }
+
+// Disable button :focus outline
+button:focus {
+  outline: none;
+}
+
+// Remove highlight border color between thead, tbody and tfoot.
+.table > :not(:first-child) {
+  border-top: 0;
+}
+
+// Override light border
+.border-light {
+  border-color: $border-light-color !important;
+}

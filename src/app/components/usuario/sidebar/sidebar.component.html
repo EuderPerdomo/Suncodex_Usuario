@@ -1,0 +1,96 @@
+<div class="card" *ngIf="user_login">
+    <div class="card-body">
+        <h5 class="card-title mb-1">{{user_login.apellidos}} {{user_login.nombres}}</h5>
+        <p class="card-text text-muted mb-lg-0">{{user_login.email}}</p>
+        <a href="#account-menu" class="btn btn-primary w-100 d-lg-none" data-bs-toggle="collapse">Account Menu</a>
+    </div>
+    <div id="account-menu" class="collapse d-lg-block">
+        <div class="list-group list-group-flush border-top">
+
+            <a [routerLink]="['/usuario/perfil']" routerLinkActive="active" *appMostrarPorRol="['empresa','usuario_final','instalador']"
+                class="list-group-item list-group-item-action d-flex align-items-center active">
+                <i class="ci-profile fs-lg me-2"></i>
+                <span>Perfil</span>
+            </a>
+            <a [routerLink]="['/cuenta/direcciones']" routerLinkActive="active"
+                class="list-group-item list-group-item-action d-flex align-items-center">
+                <i class="ci-bag fs-lg me-2"></i>
+                <span>Mis Direcciones</span>
+            </a>
+            <a [routerLink]="['/usuario/indexCalculosFotovoltaicos']"  class="list-group-item list-group-item-action d-flex align-items-center"
+            *appMostrarPorRol="['empresa']">
+                <i class="ci-heart fs-lg me-2"></i>
+                <span>Paneles Solares</span>
+                <span class="badge bg-warning ms-auto">2</span>
+            </a>
+            <a href="account-recently-viewed.html"  
+                class="list-group-item list-group-item-action d-flex align-items-center">
+                <i class="ci-eye fs-lg me-2"></i>
+                <span>Visto Reciente</span>
+            </a>
+            <a href="account-reviews.html" class="list-group-item list-group-item-action d-flex align-items-center">
+                <i class="ci-star fs-lg me-2"></i>
+                <span>Reseñas</span>
+            </a>
+            <a  (click)="logout()" class="list-group-item list-group-item-action d-flex align-items-center" style="cursor:pointer;">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Cerrar Sesión</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+  <!-- Navigation -->
+  <ul class="navbar-nav mb-md-4">
+    <!-- *appMostrarPorRol="['empresa']" -->
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/baterias']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa']">
+            <i class="fe fe-battery"></i> Baterias
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/controladores']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa']">
+            <i class="fe fe-cpu"></i> Controladores
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/inversores']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa']">
+            <i class="fe fe-activity"></i> Inversores
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/empresas']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa']">
+            <i class="fe fe-home"></i> Mis Empresas
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/empresasFavoritas']" routerLinkActive="active"
+            *appMostrarPorRol="['instalador','empresa']">
+            <i class="fe fe-users"></i> Mis Proveedores
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/contacto']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa','instalador']">
+            <i class="fe fe-mail"></i> Mensajes
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link " [routerLink]="['/usuario/indexCalculosFotovoltaicos']" routerLinkActive="active"
+            *appMostrarPorRol="['empresa','usuario_final','instalador']">
+            <i class="fe fe-menu"></i> Calculos Fotovoltaicos
+        </a>
+    </li>
+
+</ul>

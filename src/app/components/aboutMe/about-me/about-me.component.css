@@ -1,0 +1,65 @@
+body {
+    font-family: 'Comic Sans MS', sans-serif;
+    background: linear-gradient(to right, #f8ffae, #43c6ac);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    color: #333;
+  }
+  .container {
+    background: #ffffff;
+    width: 80%;
+    max-width: 800px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+  }
+  h1, h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.6;
+  }
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+    object-fit: cover;
+    border: 1px solid #333;
+  }
+  .section {
+    margin-top: 30px;
+  }
+  .contact-info a {
+    display: inline-block;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-size: 1.8em;
+    transition: color 0.3s ease;
+  }
+  .contact-info a:hover {
+    color: #007bff;
+  }
+  .skills span {
+    background-color: #43c6ac;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    display: inline-block;
+    margin: 5px 3px;
+    animation: float 2s infinite alternate;
+  }
+  @keyframes float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+  }

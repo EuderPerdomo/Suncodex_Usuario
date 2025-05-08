@@ -1,0 +1,86 @@
+
+
+
+<app-nav></app-nav>
+
+<div class="main-content"  style="margin-top: 160px;">
+  <div class="container-fluid">
+    <div class="row">
+      <!-- ALERTA INFORMATIVA -->
+      <div class="col-12">
+        <div class="alert alert-success text-center">
+          <i class="fe fe-info mr-1"></i>
+          Aquí encontrarás electrodomésticos agrupados por categorías. Arrástralos al contenedor "En funcionamiento" y ajusta los tiempos de uso para ver cómo afectan el consumo eléctrico y las emisiones de CO₂.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- SECCIÓN: LISTA DE ELECTRODOMÉSTICOS -->
+      <div class="col-4">
+        <h2>Electrodomésticos</h2>
+        <cdk-accordion class="example-accordion">
+          <div *ngFor="let item of data; let index = index">
+            <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item">
+              <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                {{ item.nombre }}
+                <span>{{ accordionItem.expanded ? 'Cerrar' : 'Abrir' }}</span>
+              </div>
+              <div class="example-accordion-item-body" [style.display]="accordionItem.expanded ? '' : 'none'">
+                <div cdkDropListGroup>
+                  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="item.electrodomesticos" [cdkDropListConnectedTo]="[todoList]" (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let sub of item.electrodomesticos" cdkDrag>
+                      {{ sub.nombre }} | Potencia: {{ sub.potencia }}W
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </cdk-accordion-item>
+          </div>
+        </cdk-accordion>
+      </div>
+
+      <!-- SECCIÓN: EN FUNCIONAMIENTO -->
+      <div class="col-4">
+        <h2>En funcionamiento</h2>
+        <p>Mueve el control deslizante de cada electrodoméstico para ajustar el tiempo de uso diario.</p>
+        <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="agregados" [cdkDropListConnectedTo]="[doneList]" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of agregados">
+            <span class="delete-icon" (click)="eliminarElemento(item)" title="Desconectar">&#10006;</span>
+            <div class="item-info">
+              <p class="item-name">{{ item.nombre }}</p>
+              <p class="item-details">Potencia: {{ item.potencia }} W | Uso diario: {{ item.uso_dia }} H</p>
+            </div>
+            <input type="range" min="0" max="24" step="0.08" [value]="item?.uso_dia || 0" (input)="actualizarHorasUso(item, $event)" />
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN: GRÁFICO Y RESUMEN -->
+      <div class="col-4">
+        <h2>Resumen de Consumo</h2>
+        <canvas id="ChartPerfilConsumo"></canvas>
+        <div class="card mt-3">
+          <div class="card-body text-center">
+            <h6 class="text-uppercase text-muted">Consumo Diario</h6>
+            <span class="h2">{{ total_dia | number: '1.2-2'}} W</span>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body text-center">
+            <h6 class="text-uppercase text-muted">Emisiones de CO₂</h6>
+            <span class="h2">{{ huella | number: '1.2-2' }} Toneladas al Año</span>
+          </div>
+        </div>
+        <div class="card mt-3">
+          <div class="card-body text-center">
+            <h6 class="text-uppercase text-muted">Potencia Simultánea</h6>
+            <span class="h2">{{ potencia | number: '1.2-2' }} W</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

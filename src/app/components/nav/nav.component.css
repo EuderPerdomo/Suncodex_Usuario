@@ -1,0 +1,43 @@
+ .header{
+  position:fixed;
+  width: 100%;
+ }
+ 
+ /* Estilo para el texto del logo */
+  .brand-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff; /* Color blanco para contrastar con el fondo oscuro */
+  }
+  
+  /* Ajuste adicional para el logo */
+  .navbar-brand img {
+    transition: transform 0.3s ease; /* Efecto de hover */
+  }
+  
+  .navbar-brand img:hover {
+    transform: scale(1.1); /* Escala el logo al pasar el mouse */
+  }
+
+  /* Navbar fija */
+.navbar {
+    /*position: fixed;*/
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+    width: 100%;
+  }
+  
+  /* Ajuste para el contenido */
+  body {
+    padding-top: 56px; /* Ajusta según la altura real de tu navbar */
+  }
+  
+  /* Efecto hover del logo (mantén tu código existente) */
+  .navbar-brand img {
+    transition: transform 0.3s ease;
+  }
+  .navbar-brand img:hover {
+    transform: scale(1.1);
+  }

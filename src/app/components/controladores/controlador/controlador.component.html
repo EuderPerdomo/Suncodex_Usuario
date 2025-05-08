@@ -1,0 +1,69 @@
+<app-nav></app-nav>
+
+<div class="spline-container">
+
+    <div class="overlay-content">
+        <h2>Controladores Solares</h2>
+    </div>
+    
+
+   <spline-viewer 
+        url="https://prod.spline.design/aZX1FAR8GdTwoTTE/scene.splinecode"
+        loading-anim-type="spinner-small"
+        events-target="global">
+    </spline-viewer> 
+</div>
+
+<div class="container-fluid cards-section">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/img/avanzada.jpg" class="card-img-top" alt="Calculadora Avanzada">
+          <div class="card-body">
+            <h3 class="card-title">PWM/MPPT</h3>
+            <p class="card-text">
+         Compara los comportamientos de carga entre un controlador PWM vs Un mppt
+            </p>
+            <!-- <a [routerLink]="['/controladorFuncionalidades/pwmVSmppt']" class="btn btn-outline-primary">PWM/MPPT</a> -->
+            <a [routerLink]="['/controladorFuncionalidades/pwmVSmppt']" class="btn btn-outline-primary">PWM/MPPT</a>
+          </div>
+        </div>
+      </div>
+  
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/img/tax.jpg" class="card-img-top" alt="Facturas">
+          <div class="card-body">
+            <h3 class="card-title">Otra herramienta</h3>
+            <p class="card-text">
+              Si no conoces los consumos de todos los equipos pero tienes una factura de energía a
+              la mano, esta es la mejor opción para ti.
+            </p>
+            <a [routerLink]="['calculo/crear/facturas']" class="btn btn-outline-primary">Comenzar</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <img src="assets/img/estandar.jpg" class="card-img-top" alt="Estandar">
+          <div class="card-body">
+            <h3 class="card-title">Otra Herramienta</h3>
+            <p class="card-text">
+              Aquí te proporcionaremos diferentes electrodomésticos de uso común con sus potencias para que diseñes
+              un sistema fotovoltaico a partir de ellos.
+            </p>
+            <a [routerLink]="['calculo/interactiva']" class="btn btn-outline-primary">Comenzar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+  <app-footer></app-footer>
+
+

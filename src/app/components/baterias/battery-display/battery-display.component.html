@@ -1,0 +1,43 @@
+<div class="battery">
+    <div class="main_container">
+      <div class="charging_info">
+        <p class="battery_level">{{ soc |number:'1.0-0' }}%</p>
+        <img class="charging_icon" src="assets/img/logo_noFondo.png" *ngIf="isCharging" />
+      </div>
+      <div class="charging_bar" [style.width.%]="soc"></div>
+    </div>
+    <div class="right_bar"></div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
