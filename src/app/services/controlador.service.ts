@@ -10,7 +10,6 @@ import { CalculadoraService } from '../services/calculadora.service';
 import { BehaviorSubject } from 'rxjs';
 import { PanelSolarService } from './panel-solar.service';
 
-declare var iziToast: any
 @Injectable({
   providedIn: 'root'
 })

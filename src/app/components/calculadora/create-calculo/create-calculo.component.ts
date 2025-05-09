@@ -122,8 +122,12 @@ export class CreateCalculoComponent implements AfterViewInit {
         color: '#FFF',
         class: 'text-danger',
         position: 'topRight',
-        message: "⚡ Cantidad de paneles en Array supera paneles Calculados. 🔋"
+        message: "⚡ Cantidad de paneles en Array supera paneles Calculados. 🔋",
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
       });
+
     }
 
 
@@ -302,14 +306,24 @@ export class CreateCalculoComponent implements AfterViewInit {
   //Bloqueo boton de edicion
   public editando = false
   //******************** Finaliza Registro de Potencias
+  /* public consumos_mes = {
+     mes_1: 0,
+     mes_2: 0,
+     mes_3: 0,
+     mes_4: 0,
+     mes_5: 0,
+     mes_6: 0,
+   }
+ */
   public consumos_mes = {
-    mes_1: 0,
-    mes_2: 0,
-    mes_3: 0,
-    mes_4: 0,
-    mes_5: 0,
-    mes_6: 0,
-  }
+    mes_1: null as number | null,
+    mes_2: null as number | null,
+    mes_3: null as number | null,
+    mes_4: null as number | null,
+    mes_5: null as number | null,
+    mes_6: null as number | null
+  };
+
   public consumo_diario = 0
 
   public perfil_carga = [0.0505, 0.035, 0.02, 0.025, 0.0245, 0.0265,
@@ -513,6 +527,7 @@ export class CreateCalculoComponent implements AfterViewInit {
     this._route.params.subscribe(
       params => {
         this.calculo.tipo = params['tipo'];
+        this._calculadoraService.setTipoCalculo( params['tipo'])
         console.log('tipo de calculo', params['tipo'])
       }
     );
@@ -1015,7 +1030,7 @@ export class CreateCalculoComponent implements AfterViewInit {
 
   }
 
- async validar_array_controlador() {
+  async validar_array_controlador() {
 
 
     const dataEntrada = {
@@ -1026,34 +1041,70 @@ export class CreateCalculoComponent implements AfterViewInit {
       amperaje: this.controlador_seleccionado.amperaje,
 
       //Del arreglo
-      amperaje_array_fv:this.amperajeHijo,
-      voltaje_array_fv:this.voltajeHijo
+      amperaje_array_fv: this.amperajeHijo,
+      voltaje_array_fv: this.voltajeHijo
     }
     //const calculoPanel = await this._panelSolarService.calcularPanelesAsync(dataEntrada)
     const compatibilidad = await this._controladorService.validarCompatibilidadControlador(dataEntrada)
 
 
-        if (compatibilidad.amperaje) { //if (voltaje != this.tension) {
-          iziToast.show({
-            title: 'Ok',
-            titleColor: '#FF0000',
-            color: '#FFF',
-            class: 'text-susces',
-            position: 'topRight',
-            message: "La corriente del array es acorde al controlador"
-          });
+    if (compatibilidad.amperaje) { //if (voltaje != this.tension) {
 
-        }else{
-          iziToast.show({
-            title: 'ALERTA',
-            titleColor: '#FF0000',
-            color: '#FFF',
-            class: 'text-danger',
-            position: 'topRight',
-            message: "La corriente del array es superior a la soportada por el controlador"
-          });
-        }
-    
+      iziToast.show({
+        title: 'Corriente',
+        titleColor: '#1DC74C',
+        color: '#FFF',
+        class: 'text-success',
+        position: 'topRight',
+        message: "La corriente del array es acorde al controlador",
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+
+    } else {
+      iziToast.show({
+        title: 'ALERTA',
+        titleColor: '#FF0000',
+        color: '#FFF',
+        class: 'text-danger',
+        position: 'topRight',
+        message: "La corriente del array es superior a la soportada por el controlador",
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+    }
+
+    //Validacion de voltaje
+
+    if (compatibilidad.voltaje) { //if (voltaje != this.tension) {
+      iziToast.show({
+        title: 'Voltaje',
+        titleColor: '#1DC74C',
+        color: '#FFF',
+        class: 'text-success',
+        position: 'topRight',
+        message: "El controlador Soporta el Voltaje del Array",
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+
+    } else {
+      iziToast.show({
+        title: 'ALERTA',
+        titleColor: '#FF0000',
+        color: '#FFF',
+        class: 'text-danger',
+        position: 'topRight',
+        message: "El Voltaje del array es superior al soportado por el controlador",
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+    }
+
   }
 
   asignar_voltaje_potencia() {
@@ -1119,9 +1170,8 @@ export class CreateCalculoComponent implements AfterViewInit {
     this.camposRequeridos.controlador_cantidad_paralelo = true
 
     //Ya en este momento he definido un controlador 
-    this.controladorDefinido=true
+    this.controladorDefinido = true
     this.calcularControlador()
-
   }
   //Fin Controladores
 
@@ -1351,50 +1401,134 @@ export class CreateCalculoComponent implements AfterViewInit {
 
 
   //****************************************Consumos facturas Inicio */
-  onKey(event: any) { // without type info
-    const total_diario_antiguo = this.total_dia
 
-    var promedio = (this.consumos_mes.mes_1 + this.consumos_mes.mes_2 + this.consumos_mes.mes_3 + this.consumos_mes.mes_4 + this.consumos_mes.mes_5 + this.consumos_mes.mes_6) / 6
-    this.total_dia = (promedio * 1000) / 31
-    console.log('consumo diario', this.total_dia)
+  validarConsumosMensuales(): boolean {
+    // Verificar que todos los campos estén completos
+    const mesesCompletos = Object.values(this.consumos_mes).every(
+      valor => valor !== null && valor !== undefined && !isNaN(valor) && valor >= 0
+    );
 
+    if (!mesesCompletos) {
+      iziToast.warning({
+        title: 'Datos incompletos',
+        message: 'Por favor complete todos los meses con valores válidos (números positivos)',
+        position: 'topRight',
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+      return false;
+    }
 
-    this.simultaneo = 1000
-    this.potenciaDefinida = true
+    // Verificar que no sean cero todos (podría ser opcional)
+    const sumaTotal = Object.values(this.consumos_mes).reduce((a, b) => a! + b!, 0);
+    if (sumaTotal === 0) {
+      iziToast.warning({
+        title: 'Valores inválidos',
+        message: 'Los consumos mensuales no pueden ser todos cero',
+        position: 'topRight',
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+      return false;
+    }
 
-    this.camposRequeridos.potencias = true
-    this.camposRequeridos.simultaneo = true
-    this.camposRequeridos.total_dia = true
+    return true;
+  }
 
-    //this.perfil_consumo()
+  /*
+    onKey(event: any) { // without type info
+      const total_diario_antiguo = this.total_dia
+  
+      var promedio = (this.consumos_mes.mes_1 + this.consumos_mes.mes_2 + this.consumos_mes.mes_3 + this.consumos_mes.mes_4 + this.consumos_mes.mes_5 + this.consumos_mes.mes_6) / 6
+      this.total_dia = (promedio * 1000) / 31
+      console.log('consumo diario', this.total_dia)
+  
+  
+      this.simultaneo = 1000
+      this.potenciaDefinida = true
+  
+      this.camposRequeridos.potencias = true
+      this.camposRequeridos.simultaneo = true
+      this.camposRequeridos.total_dia = true
+  
+      //this.perfil_consumo()
+  
+      //Determinamos sistema de acumulación de acuerdo a la potencia de consumo diaria
+      const tensionantigua = this.tension_sistema // const tensionantigua = this.tension
+      if (this.total_dia <= 800) {
+        this.tension_sistema = 12 //this.tension = 12
+        this._calculadoraService.setTensionSistema(12)
+      } else if (this.total_dia > 800 && this.total_dia <= 1600) {
+  
+        this.tension_sistema = 24 //this.tension = 24
+        this._calculadoraService.setTensionSistema(24)
+      } else if (this.total_dia > 1600 && this.total_dia <= 3200) {
+        this.tension_sistema = 48 //this.tension = 48
+        this._calculadoraService.setTensionSistema(48)
+      } else if (this.total_dia > 3200) {
+        this.tension_sistema = 48 //this.tension = 48
+        this._calculadoraService.setTensionSistema(48)
+      }
+      //Determinamos si cambio los valores debo recalcular todo
+  
+      //Todo Cambios en la tensión
+      if (tensionantigua != this.tension_sistema || total_diario_antiguo != this.total_dia) { //if (tensionantigua != this.tension || total_diario_antiguo != this.total_dia) {
+        this.tensionDefinida = true
+        this.camposRequeridos.tension_sistema = true
+        if (this.panelDefinido) { this.calcularPaneles() }
+        if (this.bateriaDefinido) { this.calcularBaterias() }
+        if (this.inversorDefinido) { this.calcularInversor() }
+      }
+  
+    }*/
+  onKey(event: any) {
+    // Primero validamos los datos
+    if (!this.validarConsumosMensuales()) {
+      this.potenciaDefinida = false;
+      return;
+    }
 
-    //Determinamos sistema de acumulación de acuerdo a la potencia de consumo diaria
-    const tensionantigua = this.tension_sistema // const tensionantigua = this.tension
+    // Si pasa la validación, procedemos con los cálculos
+    const total_diario_antiguo = this.total_dia;
+
+    // Cálculo del promedio (más seguro con validación previa)
+    const valores = Object.values(this.consumos_mes) as number[];
+    const promedio = valores.reduce((a, b) => a + b, 0) / valores.length;
+
+    this.total_dia = (promedio * 1000) / 31;
+    console.log('consumo diario', this.total_dia);
+
+    this.simultaneo = 1000;
+    this.potenciaDefinida = true;
+
+    this.camposRequeridos.potencias = true;
+    this.camposRequeridos.simultaneo = true;
+    this.camposRequeridos.total_dia = true;
+
+    // Determinación de tensión del sistema
+    const tensionantigua = this.tension_sistema;
+
     if (this.total_dia <= 800) {
-      this.tension_sistema = 12 //this.tension = 12
-      this._calculadoraService.setTensionSistema(12)
-    } else if (this.total_dia > 800 && this.total_dia <= 1600) {
-
-      this.tension_sistema = 24 //this.tension = 24
-      this._calculadoraService.setTensionSistema(24)
-    } else if (this.total_dia > 1600 && this.total_dia <= 3200) {
-      this.tension_sistema = 48 //this.tension = 48
-      this._calculadoraService.setTensionSistema(48)
-    } else if (this.total_dia > 3200) {
-      this.tension_sistema = 48 //this.tension = 48
-      this._calculadoraService.setTensionSistema(48)
-    }
-    //Determinamos si cambio los valores debo recalcular todo
-
-    //Todo Cambios en la tensión
-    if (tensionantigua != this.tension_sistema || total_diario_antiguo != this.total_dia) { //if (tensionantigua != this.tension || total_diario_antiguo != this.total_dia) {
-      this.tensionDefinida = true
-      this.camposRequeridos.tension_sistema = true
-      if (this.panelDefinido) { this.calcularPaneles() }
-      if (this.bateriaDefinido) { this.calcularBaterias() }
-      if (this.inversorDefinido) { this.calcularInversor() }
+      this.tension_sistema = 12;
+    } else if (this.total_dia <= 1600) {
+      this.tension_sistema = 24;
+    } else {
+      this.tension_sistema = 48;
     }
 
+    this._calculadoraService.setTensionSistema(this.tension_sistema);
+
+    // Recalcular solo si hubo cambios
+    if (tensionantigua !== this.tension_sistema || total_diario_antiguo !== this.total_dia) {
+      this.tensionDefinida = true;
+      this.camposRequeridos.tension_sistema = true;
+
+      if (this.panelDefinido) this.calcularPaneles();
+      if (this.bateriaDefinido) this.calcularBaterias();
+      if (this.inversorDefinido) this.calcularInversor();
+    }
   }
 
 
@@ -1433,8 +1567,12 @@ export class CreateCalculoComponent implements AfterViewInit {
         this.panelDefinido = true
         //Asigno Campos que Son requeridos
         this.camposRequeridos.cantidad_paneles = true
-      }
 
+        if (this.controladorDefinido) {// Si ya se habia definido un controlador entonces debo validarlo
+          this.validar_array_controlador()
+        }
+
+      }
 
     } else {
 
@@ -1634,6 +1772,22 @@ export class CreateCalculoComponent implements AfterViewInit {
 
 
   guardarCalculo() {
+
+    if (!this.token) {
+      iziToast.show({
+        title: '⚠️ Acción Requerida',
+        message: 'Por favor inicia sesión para guardar tu trabajo 💾',
+        color: '#FFF9E6',
+        titleColor: '#FFA500',
+        messageColor: '#5F5F5F',
+        position: 'topRight',
+        timeout: 6000,
+        progressBar: true,
+        displayMode: 1
+      });
+      return
+    }
+
     const calculo = this._calculadoraService.obtenerCalculo()
     console.log('Calculo a ser guardado', calculo)
 

@@ -94,7 +94,7 @@ export class LoginComponent {
               localStorage.setItem('token', response.token);
               localStorage.setItem('identity', response.data._id);
               localStorage.setItem('user_data', JSON.stringify(response.data));
-              this._router.navigate(['/perfil']);
+              this._router.navigate(['/usuario/perfil']);
 
 
               console.log('Verificar si esxiste un calculo guardado en memoriaa')

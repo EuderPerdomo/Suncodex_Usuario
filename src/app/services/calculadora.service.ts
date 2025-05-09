@@ -289,6 +289,13 @@ export class CalculadoraService {
     this.calculoSubject.next(this.calculo);
   }
 
+   //////////////////////////////////////////////////////////////////////////////////////////  Inician SET
+  setTipoCalculo(tipo: any) {
+    this.calculo.tipo = tipo;
+    //this.resultadoPanelSubject.next(tension);
+  }
+
+
 
   setTensionSistema(tension: any) {
     this.calculo.tension_sistema = tension;
@@ -357,6 +364,11 @@ export class CalculadoraService {
 
   getPanelResult() {
     return this.calculo.resultadoCalculoPanel;
+  }
+
+
+  getTipoCalculo(){
+    return this.calculo.tipo
   }
 
   ////////////////////////////////////////Finaliz anueva forma

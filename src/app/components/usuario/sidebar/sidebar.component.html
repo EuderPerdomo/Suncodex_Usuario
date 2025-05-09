@@ -7,7 +7,8 @@
     <div id="account-menu" class="collapse d-lg-block">
         <div class="list-group list-group-flush border-top">
 
-            <a [routerLink]="['/usuario/perfil']" routerLinkActive="active" *appMostrarPorRol="['empresa','usuario_final','instalador']"
+            <a [routerLink]="['/usuario/perfil']" routerLinkActive="active"
+                *appMostrarPorRol="['empresa','usuario_final','instalador']"
                 class="list-group-item list-group-item-action d-flex align-items-center active">
                 <i class="ci-profile fs-lg me-2"></i>
                 <span>Perfil</span>
@@ -17,13 +18,8 @@
                 <i class="ci-bag fs-lg me-2"></i>
                 <span>Mis Direcciones</span>
             </a>
-            <a [routerLink]="['/usuario/indexCalculosFotovoltaicos']"  class="list-group-item list-group-item-action d-flex align-items-center"
-            *appMostrarPorRol="['empresa']">
-                <i class="ci-heart fs-lg me-2"></i>
-                <span>Paneles Solares</span>
-                <span class="badge bg-warning ms-auto">2</span>
-            </a>
-            <a href="account-recently-viewed.html"  
+          
+            <a href="account-recently-viewed.html"
                 class="list-group-item list-group-item-action d-flex align-items-center">
                 <i class="ci-eye fs-lg me-2"></i>
                 <span>Visto Reciente</span>
@@ -32,65 +28,69 @@
                 <i class="ci-star fs-lg me-2"></i>
                 <span>Reseñas</span>
             </a>
-            <a  (click)="logout()" class="list-group-item list-group-item-action d-flex align-items-center" style="cursor:pointer;">
+            <a (click)="logout()" class="list-group-item list-group-item-action d-flex align-items-center"
+                style="cursor:pointer;">
                 <i class="ci-logout fs-lg me-2"></i>
                 <span>Cerrar Sesión</span>
             </a>
+
+              <a [routerLink]="['/usuario/indexCalculosFotovoltaicos']"
+                class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-heart fs-lg me-2"></i>
+                <span>Paneles Solares</span>
+                <span class="badge bg-warning ms-auto">2</span>
+            </a>
+
+            <a [routerLink]="['/baterias']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Baterias</span>
+            </a>
+
+             <a [routerLink]="['/controladores']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Controladores</span>
+            </a>
+
+             <a [routerLink]="['/inversores']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Inversores</span>
+            </a>
+
+               <a [routerLink]="['/empresas']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Mis Empresas</span>
+            </a>
+
+             <a [routerLink]="['/empresasFavoritas']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Mis Proveedores</span>
+            </a>
+
+             <a [routerLink]="['/contacto']" 
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa','instalador']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Mensajes/Notificaciones</span>
+            </a>
+
+             <a [routerLink]="['/usuario/indexCalculosFotovoltaicos']"
+            class="list-group-item list-group-item-action d-flex align-items-center"
+                *appMostrarPorRol="['empresa','usuario_final','instalador']">
+                <i class="ci-logout fs-lg me-2"></i>
+                <span>Calculos Fotovoltaicos</span>
+            </a>
+
         </div>
     </div>
 </div>
-
-  <!-- Navigation -->
-  <ul class="navbar-nav mb-md-4">
-    <!-- *appMostrarPorRol="['empresa']" -->
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/baterias']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa']">
-            <i class="fe fe-battery"></i> Baterias
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/controladores']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa']">
-            <i class="fe fe-cpu"></i> Controladores
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/inversores']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa']">
-            <i class="fe fe-activity"></i> Inversores
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/empresas']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa']">
-            <i class="fe fe-home"></i> Mis Empresas
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/empresasFavoritas']" routerLinkActive="active"
-            *appMostrarPorRol="['instalador','empresa']">
-            <i class="fe fe-users"></i> Mis Proveedores
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/contacto']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa','instalador']">
-            <i class="fe fe-mail"></i> Mensajes
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link " [routerLink]="['/usuario/indexCalculosFotovoltaicos']" routerLinkActive="active"
-            *appMostrarPorRol="['empresa','usuario_final','instalador']">
-            <i class="fe fe-menu"></i> Calculos Fotovoltaicos
-        </a>
-    </li>
-
-</ul>

@@ -1,89 +1,88 @@
-
 <header class="header">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-  <div class="container-fluid">
-    <!-- <a class="navbar-brand" href="#">SuncoDeX</a> -->
-    <a class="navbar-brand" href="#">
-      <img src="../assets/img/logo_noFondo.png" alt="Logo" width="120" height="30" class="d-inline-block align-text-top me-2">
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+      <!-- <a class="navbar-brand" href="#">SuncoDeX</a> -->
+      <a class="navbar-brand" href="#">
+        <img src="../assets/img/logo_noFondo.png" alt="Logo" width="120" height="30"
+          class="d-inline-block align-text-top me-2">
+      </a>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['/calculo/crear']" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Calculadora
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" [routerLink]="['/calculo/crear/potencias']" >Por Potencias</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/calculo/crear/facturas']">Facturas</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="['/calculo/interactiva']">Interactiva</a></li>
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['/calculo/crear']" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Componentes
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <!-- <li><a class="dropdown-item" [routerLink]="['/calculo/crear']" >Paneles Solares</a></li> -->
-            <li><a class="dropdown-item" [routerLink]="['/panelSolar/paneles']" >Paneles Solares</a></li>
-            <!-- <li><a class="dropdown-item" [routerLink]="['/controlador/controladores']">Controladores</a></li> -->
-            <li><a class="dropdown-item" [routerLink]="['/controladores']">Controladores</a></li>
-            <li><a class="dropdown-item" [routerLink]="['/inversor/inversores']">Inversores</a></li>
-            <li><a class="dropdown-item"[routerLink]="['/bateria/baterias']">Baterias</a></li>
-            <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" [routerLink]="['/lamparaSolar/lamparasSolares']">Lamparas Solares</a></li>
-            <!-- <li><a class="dropdown-item" [routerLink]="['/lamparaSolar/simularLamparaSolar']">Lamparas Solares</a></li> -->
-            <!-- <li><a class="dropdown-item" [routerLink]="['/lamparaSolar/lamparasSolares']">Indice Lamparas</a></li> -->
-          </ul>
-        </li>
+      <button class="navbar-toggler" type="button" 
+         [attr.aria-expanded]="!isCollapsed" (click)="collapse.toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse"  #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li ngbDropdown class="nav-item dropdown">
 
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false" ngbDropdownToggle>
+              Calculadora
+            </a>
 
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" [routerLink]="['/calculo/crear']" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Paneles Solares
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li> <a class="dropdown-item" [routerLink]="['/panelSolar/simularPanelSolar']">Inclinación/Azimuth</a></li>
-            <li> <a class="dropdown-item" [routerLink]="['/panelSolar/arreglos']">Arreglos Fotovoltaicos</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" [routerLink]="['/lamparaSolar/simularLamparaSolar']">Otro enlace</a></li>
-          </ul>
-        </li> -->
+            <!-- <button type="button" class="nav-link" ngbDropdownToggle>Dropdown</button> -->
+            <div ngbDropdownMenu>
+          <li><a class="dropdown-item" [routerLink]="['/calculo/crear/potencias']">Por Potencias</a></li>
+          <li><a class="dropdown-item" [routerLink]="['/calculo/crear/facturas']">Facturas</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item" [routerLink]="['/calculo/interactiva']">Interactiva</a></li>
+          <!-- <button ngbDropdownItem>Action</button>
+          <button ngbDropdownItem>Another action</button>
+          <button ngbDropdownItem>Something else here</button>
+          <div class="dropdown-divider"></div>
+          <button ngbDropdownItem>Separated link</button> -->
+      </div>
+      </li>
 
+      <li ngbDropdown class="nav-item dropdown">
 
-        <!-- <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/panelSolar/simularPanelSolar']">Simular Panel</a>
-        </li> -->
-        <!-- <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/contactenos']">Contactenos</a>
-        </li>
+        <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+          ngbDropdownToggle>
+          Componentes
+        </a>
 
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/aboutMe']">Conocenos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/blog/post_list']">Blog</a>
-        </li> 
-        
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>  
-        
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        <!-- <button type="button" class="nav-link" ngbDropdownToggle>Dropdown</button> -->
+        <div ngbDropdownMenu>
+      <li><a class="dropdown-item" [routerLink]="['/panelSolar/paneles']">Paneles Solares</a></li>
+      <!-- <li><a class="dropdown-item" [routerLink]="['/controlador/controladores']">Controladores</a></li> -->
+      <li><a class="dropdown-item" [routerLink]="['/controladores']">Controladores</a></li>
+      <li><a class="dropdown-item" [routerLink]="['/inversor/inversores']">Inversores</a></li>
+      <li><a class="dropdown-item" [routerLink]="['/bateria/baterias']">Baterias</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item" [routerLink]="['/lamparaSolar/lamparasSolares']">Lamparas Solares</a></li>
     </div>
-  </div>
-</nav>
-</header>
+    </li>
 
+
+
+
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/contactenos']">Contactenos</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/aboutMe']">Conocenos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/blog/post_list']">Blog</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/login']">Login</a>
+    </li>
+
+    </ul>
+    <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    </div>
+    </div>
+  </nav>
+</header>
