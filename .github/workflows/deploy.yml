@@ -31,8 +31,8 @@ jobs:
       # --- PASO 4: Compilación con versión controlada de Angular ---
       - name: Build Angular production
         run: |
-          npx -p @angular/cli@19.2.9 ng build --configuration production --aot
-          ls -la dist/admin/browser  # Verificación
+          npx -p @angular/cli@19.1.8 ng build --configuration production --aot
+          ls -la dist/usuario/browser  # Verificación
 
       # --- PASO 5: Desplegar en servidor (estructura plana) ---
       - name: Deploy to server
@@ -42,10 +42,10 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          source: "dist/admin/browser/**"
+          source: "dist/usuario/browser/**"
           target: "/var/www/html/usuario"
           rm: true  # Elimina archivos antiguos
-          strip_components: 3  # Omite carpetas dist/admin/browser
+          strip_components: 3  # Omite carpetas dist/usuario/browser
 
       # --- PASO 6 (Opcional): Reiniciar Nginx ---
       - name: Restart web server
