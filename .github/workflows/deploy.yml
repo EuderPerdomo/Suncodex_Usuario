@@ -1,0 +1,59 @@
+name: Deploy Angular to Production
+
+on:
+  push:
+    branches: [ master ]  # Cambia a 'main' si es tu rama principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- PASO 1: Obtener el código ---
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Necesario para versionado preciso
+
+      # --- PASO 2: Configurar Node.js con tu versión exacta ---
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.13.1'  # ¡Usa LA MISMA versión que en tu local!
+          cache: 'npm'
+
+      # --- PASO 3: Instalar dependencias CON versiones bloqueadas ---
+      - name: Install dependencies
+        run: |
+          npm ci --no-audit  # Instala exactamente lo que dice package-lock.json
+          echo "Versión de Angular CLI: $(npx ng version | grep 'Angular CLI')"
+
+      # --- PASO 4: Compilación con versión controlada de Angular ---
+      - name: Build Angular production
+        run: |
+          npx -p @angular/cli@19.1.8 ng build --configuration production --aot
+          ls -la dist/admin/browser  # Verificación
+
+      # --- PASO 5: Desplegar en servidor (estructura plana) ---
+      - name: Deploy to server
+        uses: appleboy/scp-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "dist/admin/browser/**"
+          target: "/var/www/html/usuario"
+          rm: true  # Elimina archivos antiguos
+          strip_components: 3  # Omite carpetas dist/admin/browser
+
+      # --- PASO 6 (Opcional): Reiniciar Nginx ---
+      - name: Restart web server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            sudo systemctl restart nginx
